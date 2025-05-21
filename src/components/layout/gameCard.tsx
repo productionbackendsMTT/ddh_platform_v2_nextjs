@@ -3,7 +3,7 @@ import React from 'react'
 
 const GameCard = ({ StylesClass,ImageClass,Cardkey,isFrame }: any) => {
     return (
-        <div key={Cardkey} className={`relative  ${isFrame && 'box'} transition-all cursor-pointer ${StylesClass} `}>
+        <div key={Cardkey} className={`relative  ${isFrame && 'box'}  transition-all cursor-pointer ${StylesClass} `}>
             
             <Image
                 src={'/assets/images/viking.png'}

@@ -146,83 +146,86 @@
     }
 }
 
-/* Styling for the main box */
-.box {
-  position: relative;
+/*// Glow Border Animation //*/
+
+.animated-border-box{
+  position: absolute;
+  overflow: hidden; 
+  z-index: 2;
+  border-radius: 3vw;
 }
 
-/* Common rotation animation */
-@property --a {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@keyframes rotating {
-  0% {
-    --a: 0deg;
-  }
-  100% {
-    --a: 360deg;
+@media (orientation: portrait) {
+  .animated-border-box {
+    border-radius: 3vh; /* Use vh for portrait orientation */
   }
 }
 
-/* Base styling using default (mobile-first: portrait) */
-.box::before,
-.box::after,
-.box span {
-  border-radius: 3vh;
+
+.animated-border-box-glow{
+  overflow: hidden;
+  /* Glow Blur */
+  filter: blur(20px);
 }
 
-/* Main gradient animation */
-.box::before {
-  content: "";
+.animated-border-box:before, .animated-border-box-glow:before {
+  content: '';
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
   position: absolute;
-  inset: 0;
-  background: repeating-conic-gradient(from var(--a),
-    rgb(0, 106, 255),
-    rgb(212, 0, 255),
-    #0ff,
-    #f0f,
-    rgb(0, 255, 157));
-  animation: rotating 2s linear infinite;
+  width: 99999px;
+  height: 99999px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  /* Neon glow colors */
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    #7c03b4, /* Green */
+    #c20569, /* Pink */
+    rgba(0, 0, 0, 0) 25%
+  );
+  /* Adjust speed for a smoother glow */
+  animation: rotate 4s linear infinite;
+  filter: blur(30px); /* Enhance the glow effect */
 }
 
-/* Blurred glow gradient */
-.box::after {
-  content: "";
-  position: absolute;
-  background: repeating-conic-gradient(from var(--a),
-    #0f0,
-    #ff0,
-    #0ff,
-    #f0f,
-    #0ff);
-  animation: rotating 4s linear infinite;
-  filter: blur(40px);
-  opacity: 0.75;
+.animated-border-box:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+  /* border width */
+	left: 5px;
+	top: 5px;
+  /* double the px from the border width left */
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+  /*bg color*/
+  /*box border radius*/
+	border-radius: 7px;
 }
 
-/* Inner content */
-.box span {
-  position: absolute;
-  inset: 4px;
-  background: #222;
-  z-index: 1;
+@keyframes rotate {
+	100% {
+		transform: translate(-50%, -50%) rotate(1turn);
+	}
 }
 
-/* Text styling inside */
-.box .box1 span {
-  color: white;
+/*// Border Animation END//*/
+
+
+
+/*// Ignore This //*/
+body {
+  margin: 0px;
+}
+
+.center-box{
+  height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-}
-
-/* LANDSCAPE: use vw for radius in wider viewports */
-@media (orientation: landscape) {
-  .box::before,
-  .box::after,
-  .box span {
-    border-radius: 3vw;
-  }
+  background-color: #1D1E22;
 }

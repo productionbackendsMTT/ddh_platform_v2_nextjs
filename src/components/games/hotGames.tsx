@@ -23,10 +23,10 @@ const HotGames = () => {
 
   return (
     <Carousel
-     
+
       className="portrait:pt-[3vh] portrait:px-[2vh] landscape:px-[2vw] landscape:pt-[3vw] bg-[url('/assets/images/hotgames_bg.png')] bg-cover bg-no-repeat bg-center portrait:w-[29vh] portrait:h-[26vh] landscape:w-[29vw] landscape:h-[26vw]"
     >
-      <Image src={'/assets/images/hot_games_text.png'} alt='hot_games_text' width={1000} height={1000} quality={100} className=' absolute portrait:top-[-2.2vh] landscape:top-[-2.2vw] left-[50%] translate-x-[-50%] portrait:w-[13vh] portrait:h-[5vh] landscape:w-[13vw] object-contain landscape:h-[5vw]'/>
+      <Image src={'/assets/images/hot_games_text.png'} alt='hot_games_text' width={1000} height={1000} quality={100} className=' absolute portrait:top-[-2.2vh] landscape:top-[-2.2vw] left-[50%] translate-x-[-50%] portrait:w-[13vh] portrait:h-[5vh] landscape:w-[13vw] object-contain landscape:h-[5vw]' />
       <CarouselContent>
         {chunkedHotGames.map((chunk: any[], index: number) => (
           <CarouselItem
@@ -34,11 +34,14 @@ const HotGames = () => {
             className="flex flex-wrap portrait:gap-[.5vh] landscape:gap-[.5vw] items-center justify-between"
           >
             {chunk.map((game, gameIndex) => (
-              <GameCard
-                key={gameIndex}
-                ImageClass={'p-[.3vw] portrait:rounded-[2vh] landscape:rounded-[2vw]'}
-                StylesClass={'portrait:w-[8vh] portrait:h-[10vh] landscape:w-[8vw] landscape:h-[10vw] bg-[#FBC7FE] border-[#B732B4]  portrait:p-[1vh] landscape:p-[1vw]  portrait:border-[.3vh] landscape:border-[.3vw]  portrait:rounded-[2vh] landscape:rounded-[2vw]'}
-              />
+              <div  key={gameIndex} className='portrait:border-[.2vh] landscape:border-[.3vw] border-[#B732B4] portrait:rounded-[2vh] landscape:rounded-[2vw]'>
+
+                <GameCard
+                 
+                  ImageClass={' portrait:rounded-[2vh] landscape:rounded-[1.5vw]'}
+                  StylesClass={'portrait:w-[7.3vh] portrait:h-[10.5vh] landscape:w-[6.5vw] landscape:h-[10vw] bg-[#FBC7FE] border-[#F599E5]   portrait:border-[.2vh] landscape:border-[.3vw]  portrait:rounded-[1.6vh] landscape:rounded-[1.6vw]'}
+                />
+              </div>
             ))}
           </CarouselItem>
         ))}

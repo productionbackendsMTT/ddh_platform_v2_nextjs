@@ -29,7 +29,7 @@ const Navigation = () => {
                         <div className="bg-gradient-to-bl from-[#101010] transition-all via-[#141414] to-[#6D2800] rounded-full">
                             <div className={`bg-gradient-to-bl ${pathname === item.link && 'p-[.1vw]'} from-[#E9B43F] via-[#C79017] to-[#A97510] rounded-full p-0-2vw`}>
                                 <div className="portrait:border-[.2vh] landscape:border-[.2vw] border-[#57006d] rounded-full p-[.15vh] landscape:p-[.15vw]">
-                                    <div className="bg-gradient-to-bl   from-[#101010] via-[#141414] to-[#6D2800] rounded-full">
+                                    <div className="bg-gradient-to-bl   bg-[#862183d2] rounded-full">
                                         <Image
                                             src={item.icon}
                                             alt={item.name}
