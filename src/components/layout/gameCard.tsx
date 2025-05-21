@@ -1,19 +1,21 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-const GameCard = ({ StylesClass,ImageClass,Cardkey,isFrame }: any) => {
+const GameCard = ({ StylesClass, ImageClass, Cardkey, isFrame, games }: any) => {
     return (
-        <div key={Cardkey} className={`relative  ${isFrame && 'box'}  transition-all cursor-pointer ${StylesClass} `}>
-            
+        games&&(<Link href={`/${games?.slug}`} key={games?._id} className={`relative  ${isFrame && 'box'} block  cursor-pointer ${StylesClass} `}>
             <Image
-                src={'/assets/images/viking.png'}
+                src={games?.thumbnail}
                 alt='viking'
-                fill
+                height={2000}
+                width={2000}
                 quality={100}
                 priority
                 className={`w-full  h-full ${ImageClass}`}
             />
-        </div>
+        </Link>
+        )
     )
 }
 
