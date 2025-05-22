@@ -7,7 +7,7 @@ export const fetchCache = 'force-no-store';
 
 const Home = async () => {
   return (
-    <section className="relative w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden h-full">
       <video
         src={"/assets/video/city.mp4"}
         autoPlay
@@ -16,10 +16,13 @@ const Home = async () => {
         playsInline
         className="z-[-10] object-cover top-0 left-0 absolute"
       />
+      <div className="flex flex-col justify-between h-full items-center">
         <Header />
-        <Announcements />
+        {/* <Announcements /> */}
         <Game />
         <Footer />
+      </div>
+
     </section>
   );
 };

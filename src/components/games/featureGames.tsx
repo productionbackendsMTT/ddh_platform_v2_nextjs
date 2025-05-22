@@ -7,6 +7,7 @@ import {
     CarouselItem,
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
+import Image from 'next/image'
 
 const FeatureGames = () => {
     return (
@@ -15,14 +16,31 @@ const FeatureGames = () => {
                 Autoplay({
                     delay: 2000,
                 }),
-            ]} className="portrait:w-[20vh] landscape:w-[20vw]">
+            ]} className="portrait:w-[20vh] landscape:w-[20vw] border">
                 <CarouselContent>
                     {Array.from({ length: 6 }).map((_, index) => (
-                        <CarouselItem key={index} >
+                        <CarouselItem key={index}>
+                            {/* Container for video and GameCard */}
+                            <div className="relative portrait:w-[17vh]  portrait:h-[28vh] landscape:w-[17vw] landscape:h-[28vw]">
+                                {/* Video */}
 
-                            {/* <div className="animated-border-box portrait:w-[15vh]! bg-transparant portrait:h-[25vh]! landscape:w-[15vw]!  landscape:h-[25vw]!">
-                            </div> */}
-                               <GameCard isFrame={true} key={index} ImageClass={'portrait:rounded-[3.5vh] z-[10] portrait:p-[.28vh] landscape:p-[.28vw]  landscape:rounded-[3.4vw]'} StylesClass={'portrait:w-[15vh] portrait:h-[25vh] landscape:w-[15vw] landscape:h-[25vw] bg-[#F599E5] border-[#B732B4]   portrait:border-[.3vh] landscape:border-[.3vw]  portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]'} />
+                                <GameCard
+                                    isFrame={true}
+                                    ImageClass={'portrait:rounded-[1.5vh]  portrait:p-[.28vh] landscape:p-[.28vw] landscape:rounded-[1.5vw]'}
+                                    StylesClass={'absolute top-[8%] left-[50.5%] translate-x-[-50%] z-[10]  w-[80%] h-[83%] portrait:rounded-[1.5vh] landscape:rounded-[1.5vw]'}
+                                />
+
+                                <video
+                                    src={'/assets/video/frame.mp4'}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-full  h-full portrait:rounded-[2.5vh] z-[-3] absolute top-0 landscape:rounded-[2.5vw]"
+                                />
+
+                                <Image src={'/assets/video/gradient.svg'} alt='gradient' width={2000} height={2000} quality={100} className='absolute top-0 left-0 w-full h-full z-[1]' />
+                            </div>
                         </CarouselItem>
                     ))}
                 </CarouselContent>

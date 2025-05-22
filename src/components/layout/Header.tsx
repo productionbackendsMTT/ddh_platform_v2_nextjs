@@ -33,7 +33,7 @@ const Header = () => {
                         </div>
                     </div>
                     {/* logo */}
-                    <Image src="/assets/images/Logo.png" alt="login_logo" height={1000} width={1000} quality={100} priority className="absolute  top-0  left-[50%] translate-x-[-50%] portrait:w-[17vh] landscape:w-[15vw]" />
+                    <Image src="/assets/header/logo.png" alt="login_logo" height={1000} width={1000} quality={100} priority className="absolute  top-0  left-[50%] translate-x-[-50%] portrait:w-[17vh] landscape:w-[20vw]" />
                     {/* settings */}
                     <div className='flex items-center portrait:space-x-[4vh] landscape:space-x-[3vw]'>
                         <Image src={'/assets/header/share.png'} alt='share' width={200} height={200} quality={100} className='portrait:w-[3.5vh] hover:scale-110 transition-all cursor-pointer landscape:w-[3vw]' />

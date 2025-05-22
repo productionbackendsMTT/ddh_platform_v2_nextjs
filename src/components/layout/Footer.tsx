@@ -17,7 +17,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className="w-full relative flex items-center justify-center">
+      <div className="w-full relative z-[112] flex items-center justify-center">
         <FooterBg />
         <Navigation />
         {/* Spin Wheel */}

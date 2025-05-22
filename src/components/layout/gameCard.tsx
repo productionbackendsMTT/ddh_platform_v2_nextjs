@@ -4,9 +4,9 @@ import React from 'react'
 
 const GameCard = ({ StylesClass, ImageClass, Cardkey, isFrame, games }: any) => {
     return (
-        games&&(<Link href={`/${games?.slug}`} key={games?._id} className={`relative  ${isFrame && 'box'} block  cursor-pointer ${StylesClass} `}>
+        (<Link href={`/${games?.slug}`} key={games?._id} className={`relative  ${isFrame && 'box'} block  cursor-pointer ${StylesClass} `}>
             <Image
-                src={games?.thumbnail}
+                src={'/assets/images/gameimg.png'}
                 alt='viking'
                 height={2000}
                 width={2000}
