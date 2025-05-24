@@ -6,14 +6,11 @@ import { fetchGames } from '@/lib/action'
 
 const Game = async () => {
   const games = await fetchGames();
-  console.log(games, "Games");
   return (
-    <div className='flex w-[95%] z-[99] mx-auto items-center justify-around portrait:py-[1vh] landscape:py-[1vw]'>
-      {/* <FeatureGames />
-      <HotGames /> */}
-      <div className='border-2 border-red-500'>
-        <NormalGames normalGames={games?.data?.data} />
-      </div>
+    <div className='flex w-[95%] z-[99] mx-auto items-center justify-around portrait:py-[5.5vh] landscape:py-[6vw] lg:landscape:py-[8vw]'>
+      <FeatureGames />
+      <HotGames />
+      <NormalGames normalGames={games?.data?.data} />
     </div>
   )
 }

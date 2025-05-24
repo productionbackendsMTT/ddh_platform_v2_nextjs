@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import GameCard from '../layout/gameCard'
 import {
   Carousel,
@@ -7,8 +7,10 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselApi
 } from "@/components/ui/carousel"
 import Image from 'next/image'
+import useStore from '@/app/zustand/Store'
 
 interface GameData {
   category: string;
@@ -33,79 +35,125 @@ interface NormalGamesProps {
 }
 
 const NormalGames = ({ normalGames }: NormalGamesProps) => {
-  const [carouselWidth, setCarouselWidth] = useState('portrait:w-[35vh] landscape:w-[35vw] transition-all duration-500');
-  const startX = useRef<number | null>(null);
+  const { setSwiped } = useStore()
+  const isSwiped = useStore((state) => state.initialState.isSwiped)
+  const markerRef = useRef<HTMLDivElement>(null)
+  const [api, setApi] = useState<CarouselApi | null>(null)
+  const prevIndexRef = useRef(0)
 
-  const chunkArray = (arr: any[], size: number) => {
-    const result = [];
+  const normalGame = useMemo(() => Array.from({ length: 18 }, (_, i) => i + 1), [])
+
+  const chunkArray = useCallback((arr: any[], size: number) => {
+    const result = []
     for (let i = 0; i < arr.length; i += size) {
-      result.push(arr.slice(i, i + size));
+      result.push(arr.slice(i, i + size))
     }
-    return result;
-  };
+    return result
+  }, [])
 
-  const chunkedGames = chunkArray(normalGames, 2);
+  const chunkedGames = useMemo(() => chunkArray(normalGame, isSwiped ? 5 : 2), [normalGame, isSwiped, chunkArray])
 
-  // Handle both touch and mouse
-  const handleStart = (x: number) => {
-    startX.current = x;
-  };
+  useEffect(() => {
+    if (!isSwiped && api) {
+      const onSelect = () => {
+        const currentIndex = api.selectedScrollSnap();
+        if (currentIndex !== prevIndexRef.current) {
+          setSwiped(currentIndex < 0 ? false : true);
+          prevIndexRef.current = currentIndex;
+        }
+      };
 
-  const handleEnd = (x: number) => {
-    if (startX.current !== null) {
-      const deltaX = startX.current - x;
-      if (deltaX > 30) {
-        // Swiped/moved left
-        setCarouselWidth('w-[92vw] transition-all duration-500');
-      } else if (deltaX < -30) {
-        // Swiped/moved right
-        setCarouselWidth('portrait:w-[35vh] landscape:w-[35vw] transition-all duration-500');
+      api.on('select', onSelect);
+
+      // Return a cleanup function
+      return () => {
+        api.off('select', onSelect);
+      };
+    }
+
+    // Explicitly return undefined if the condition is not met
+    return undefined;
+  }, [api, isSwiped, setSwiped]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === markerRef.current) {
+            if (entry.isIntersecting) {
+              setSwiped(false)
+            } else {
+              setSwiped(false)
+            }
+          }
+        })
+      },
+      { root: null, rootMargin: '0px', threshold: 0.1 }
+    )
+
+    if (markerRef.current) {
+      observer.observe(markerRef.current)
+    }
+
+    return () => {
+      if (markerRef.current) {
+        observer.unobserve(markerRef.current)
       }
     }
-    startX.current = null;
-  };
+  }, [setSwiped])
 
   return (
     <Carousel
-      className={`relative ${carouselWidth}`}
-      onTouchStart={(e) => handleStart(e.touches[0].clientX)}
-      onTouchEnd={(e) => handleEnd(e.changedTouches[0].clientX)}
-      onMouseDown={(e) => handleStart(e.clientX)}
-      onMouseUp={(e) => handleEnd(e.clientX)}
+      setApi={setApi}
+      className={`relative  transition-all  duration-300 ease-in-out ${isSwiped ? 'landscape:w-[92vw] portrait:w-[92vh]' : 'portrait:w-[35vh] landscape:w-[35vw]'
+        }`}
     >
       <CarouselContent>
         {chunkedGames.map((chunk, index) => (
-          <CarouselItem key={index} className="flex justify-start gap-[1.5vh]">
-            {chunk.map((game) => (
-              <div key={game._id} className='portrait:border-[.3vh] relative hover:scale-95 transition-all landscape:border-[.3vw] border-[#B732B4] portrait:rounded-[3.6vh] landscape:rounded-[3.6vw]'>
-                <GameCard
-                  games={game}
-                  isFrame={false}
-                  ImageClass={'portrait:rounded-[3vh] landscape:rounded-[3vw] portrait:py-[.02vh] landscape:py-[.05vw]'}
-                  StylesClass={'portrait:w-[15vh] portrait:h-[25vh] landscape:w-[15vw] landscape:h-[25vw] bg-[#FBC7FE] border-[#F599E5] portrait:border-[.35vh] landscape:border-[.35vw] portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]'}
-                />
-                <Image
-                  src={'/assets/images/Fav.png'}
-                  alt='fav_icon'
-                  width={200}
-                  height={200}
-                  quality={100}
-                  className='absolute cursor-pointer hover:scale-110 top-[5%] right-[9%] portrait:w-[2.5vh] portrait:h-[2.5vh] landscape:w-[2.5vw] landscape:h-[2.5vw]'
-                />
+          <div key={index}>
+            {index === 0 && (
+              <div
+                ref={markerRef}
+                className="absolute right-[110%] invisible"
+                aria-hidden="true"
+              >
+                adsasdh
               </div>
-            ))}
-          </CarouselItem>
+            )}
+            <CarouselItem className="flex justify-center portrait:gap-x-[2.5vh] landscape:gap-x-[2.5vw]">
+              {chunk.map((game, gameIndex) => (
+                <div
+                  key={gameIndex}
+                  className="relative "
+                >
+                  <GameCard
+                    isFrame={false}
+                    ImageClass="portrait:rounded-[5vh] portrait:py-[.6vh] landscape:py-[.6vw] landscape:rounded-[5vw]"
+                    StylesClass="portrait:w-[15.5vh] portrait:h-[25.5vh] landscape:w-[15.5vw] landscape:h-[25.5vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
+                  />
+                  <Image
+                    src="/assets/images/Fav.png"
+                    alt="fav_icon"
+                    width={200}
+                    height={200}
+                    quality={100}
+                    className="absolute z-[10] cursor-pointer hover:scale-110 top-[10%] right-[10%] portrait:w-[2.5vh] portrait:h-[2.5vh] landscape:w-[2.5vw] landscape:h-[2.5vw]"
+                  />
+                
+                </div>
+              ))}
+            </CarouselItem>
+          </div>
         ))}
       </CarouselContent>
-
-      <div className='absolute top-[50%] right-[5%]'>
-        <CarouselNext onClick={() => setCarouselWidth('w-[92vw] transition-all duration-500')} />
+      <div className="absolute scale top-[50%] right-[-10%]">
+        <CarouselNext />
       </div>
-      <div className='absolute top-[50%] left-[5%] portrait:-translate-x-[36vh] landscape:-translate-x-[6vw]'>
-        <CarouselPrevious onClick={() => setCarouselWidth('portrait:w-[35vh] landscape:w-[35vw] transition-all duration-500')} />
+      <div className="absolute top-[50%] left-[5%] portrait:-translate-x-[39vh] landscape:-translate-x-[39vw]">
+        <CarouselPrevious />
       </div>
     </Carousel>
-  );
-};
+  )
+}
 
-export default NormalGames;
+export default NormalGames
