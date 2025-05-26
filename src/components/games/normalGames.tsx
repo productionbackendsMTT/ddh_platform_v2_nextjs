@@ -120,7 +120,7 @@ const NormalGames = ({ normalGames }: { normalGames: { image: string, slug: stri
               
               </div>
             )}
-            <CarouselItem className="flex justify-center portrait:gap-x-[.7vh] landscape:gap-x-[.7vw]">
+            <CarouselItem className="flex justify-center portrait:gap-x-[.9vh] landscape:gap-x-[.7vw]">
               {chunk.map((game, gameIndex) => (
                 <div
                   key={gameIndex}
@@ -148,10 +148,10 @@ const NormalGames = ({ normalGames }: { normalGames: { image: string, slug: stri
           </div>
         ))}
       </CarouselContent>
-      <div className="absolute scale top-[50%]  portrait:right-[-2.5vw] landscape:right-[-2.5vw]">
+      <div className="absolute scale top-[50%]  portrait:right-[-6vw] landscape:right-[-2.5vw]">
         <CarouselNext />
       </div>
-      <div className="absolute top-[50%]   portrait:left-[1.5vh] landscape:left-[1.5vw] portrait:-translate-x-[39.5vh] landscape:-translate-x-[39.5vw]">
+      <div className="absolute top-[50%]   portrait:left-[1.5vh] landscape:left-[1.5vw] portrait:-translate-x-[40vh] landscape:-translate-x-[39.5vw]">
         <CarouselPrevious />
       </div>
     </Carousel>
