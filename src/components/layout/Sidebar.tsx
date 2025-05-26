@@ -51,9 +51,9 @@ const Sidebar = () => {
                     <div className='absolute top-[15%] py-[2vw]   w-[95%]  h-full'>
                         {
                             sidebar.map((item, index) => (
-                                <button onClick={() => setCategory(item?.name)} key={index} className={`${category === item?.name ? 'bg-[#D9D9D91A]' : 'opacity-75'} portrait:gap-y-[.5vh] landscape:gap-y-[.5vw] flex-col  w-full flex justify-center hover:bg-[#D9D9D91A] cursor-pointer  px-[2vw] `}>
+                                <button onClick={() => setCategory(item?.name)} key={index} className={`${category === item?.name ? 'bg-[#D9D9D91A]' : 'opacity-75'} portrait:gap-y-[.5vh] landscape:gap-y-[.5vw] flex-col  w-full flex justify-center hover:bg-[#D9D9D91A] cursor-pointer  px-[1.5vw] `}>
                                     <div className='flex items-center justify-start portrait:gap-x-[1.5vh] landscape:gap-x-[1.5vw] w-[75%] pl-[2vw] portrait:py-[.8vh] landscape:py-[.8vw]'>
-                                        <Image src={item.icon} alt={item.name} width={2000} height={2000} priority quality={100} className="portrait:w-[4.4vh] portrait:h-[3.6vh] landscape:w-[4.4vw] landscape:h-[3.6vw]" />
+                                        <Image src={item.icon} alt={item.name} width={2000} height={2000} priority quality={100} className="portrait:w-[4.1vh] portrait:h-[3.6vh] landscape:w-[4.1vw] landscape:h-[3.6vw]" />
                                         <span className={`text-white  ${category === item?.name ? 'portrait:text-[1.6vh] landscape:text-[1.6vw]' : ' landscape:text-[1.4vw] portrait:text-[1.4vw] text-white/50'}  capitalize`}>{item?.name}</span>
                                     </div>
                                     <svg className='w-[78%] justify-center' viewBox="0 0 299 2" fill="none" xmlns="http://www.w3.org/2000/svg">

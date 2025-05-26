@@ -8,7 +8,8 @@ const Leaderboard = () => {
     return (
         <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#60185E] 
+        className="bg-[#60185E] 
+            z-50
                 portrait:rounded-[1.5vh] landscape:rounded-[1.5vw]
                 portrait:border-[.3vh] landscape:border-[.3vw] 
                 border-[#B732B4] 

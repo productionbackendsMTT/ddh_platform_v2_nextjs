@@ -213,7 +213,7 @@ const CarouselPrevious = React.forwardRef<
       ref={ref}
       size={size}
       className={cn(
-        "absolute  landscape:w-[2.5vw] portrait:w-[2.5vh] hover:scale-110 cursor-pointer rounded-full",
+        "absolute landscape:h-[2.5vw] portrait:h-[2.5vh] landscape:w-[2.5vw] portrait:w-[2.5vh] hover:scale-110 cursor-pointer rounded-full",
         orientation === "horizontal"
           ? "left-[1rem] top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -223,7 +223,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-        <Image src={'/assets/images/arrow.png'} alt="arrow-right" width={300} height={1300} className="w-full h-full]"/>
+        <Image src={'/assets/images/arrow.png'} alt="arrow-right" width={300} height={1300} className="w-full h-full"/>
 
       <span className="sr-only">Previous slide</span>
     </Button>
@@ -242,7 +242,7 @@ const CarouselNext = React.forwardRef<
       ref={ref}
       size={size}
       className={cn(
-        "absolute landscape:w-[2.5vw] hover:scale-110 cursor-pointer portrait:w-[2.5vh]  rounded-full transition-transform duration-600",
+        "absolute landscaope:h-[2.5vw] portrait:h-[2.5vh] landscape:w-[2.5vw] hover:scale-110 cursor-pointer portrait:w-[2.5vh]  rounded-full transition-transform duration-600",
         orientation === "horizontal"
           ? "-right-0 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",

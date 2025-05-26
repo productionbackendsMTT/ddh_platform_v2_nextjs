@@ -2,31 +2,28 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const GameCard = ({ StylesClass, ImageClass, isFrame, games }: any) => {
+const GameCard = ({ StylesClass, ImageClass, games,frame }: any) => {
   return (
     <Link
       href={`/${games?.slug}`}
-      key={games?._id}
-      className={`relative block cursor-pointer ${StylesClass} ${isFrame ? 'box' : ''}`}
-      // container should have dynamic size (width/height) via StylesClass or parent styles
+      key={games?.id}
+      className={`relative block cursor-pointer ${StylesClass}`}
     >
-      {/* Border image filling entire container */}
       <Image
-        src={'/assets/images/boder.webp'}
+        src={frame}
         alt='border'
         fill
         priority
         style={{ objectFit: 'cover', zIndex: 10 }}
       />
 
-      {/* Game image fit fully inside container */}
       <Image
-        src={'/assets/images/gameimg.png'}
+        src={games?.image}
         alt='game'
         fill
         priority
         className={ImageClass}
-        style={{ objectFit: 'contain', zIndex: 5 }}
+        style={{ objectFit: 'cover', zIndex: 5 }}
       />
     </Link>
   )

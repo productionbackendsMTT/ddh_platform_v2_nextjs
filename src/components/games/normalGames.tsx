@@ -34,14 +34,14 @@ interface NormalGamesProps {
   normalGames: GameData[];
 }
 
-const NormalGames = ({ normalGames }: NormalGamesProps) => {
+const NormalGames = ({ normalGames }: { normalGames: { image: string, slug: string;  id: number}[] }) => {
   const { setSwiped } = useStore()
   const isSwiped = useStore((state) => state.initialState.isSwiped)
   const markerRef = useRef<HTMLDivElement>(null)
   const [api, setApi] = useState<CarouselApi | null>(null)
   const prevIndexRef = useRef(0)
 
-  const normalGame = useMemo(() => Array.from({ length: 18 }, (_, i) => i + 1), [])
+  // const normalGame = useMemo(() => Array.from({ length: 18 }, (_, i) => i + 1), [])
 
   const chunkArray = useCallback((arr: any[], size: number) => {
     const result = []
@@ -51,7 +51,7 @@ const NormalGames = ({ normalGames }: NormalGamesProps) => {
     return result
   }, [])
 
-  const chunkedGames = useMemo(() => chunkArray(normalGame, isSwiped ? 5 : 2), [normalGame, isSwiped, chunkArray])
+  const chunkedGames = useMemo(() => chunkArray(normalGames, isSwiped ? 5 : 2), [normalGames, isSwiped, chunkArray])
 
   useEffect(() => {
     if (!isSwiped && api) {
@@ -117,19 +117,21 @@ const NormalGames = ({ normalGames }: NormalGamesProps) => {
                 className="absolute right-[110%] invisible"
                 aria-hidden="true"
               >
-                adsasdh
+              
               </div>
             )}
-            <CarouselItem className="flex justify-center portrait:gap-x-[2.5vh] landscape:gap-x-[2.5vw]">
+            <CarouselItem className="flex justify-center portrait:gap-x-[.7vh] landscape:gap-x-[.7vw]">
               {chunk.map((game, gameIndex) => (
                 <div
                   key={gameIndex}
                   className="relative "
                 >
                   <GameCard
+                    frame={'/assets/images/lowGlow_Border.png'}
+                    games={game}
                     isFrame={false}
-                    ImageClass="portrait:rounded-[5vh] portrait:py-[.6vh] landscape:py-[.6vw] landscape:rounded-[5vw]"
-                    StylesClass="portrait:w-[15.5vh] portrait:h-[25.5vh] landscape:w-[15.5vw] landscape:h-[25.5vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
+                    ImageClass="portrait:rounded-[4.7vh] portrait:p-[.5vh] landscape:p-[.5vw] landscape:rounded-[4.7vw]"
+                    StylesClass="portrait:w-[17vh] portrait:h-[27.5vh] landscape:w-[17vw] landscape:h-[27.5vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
                   />
                   <Image
                     src="/assets/images/Fav.png"
@@ -146,10 +148,10 @@ const NormalGames = ({ normalGames }: NormalGamesProps) => {
           </div>
         ))}
       </CarouselContent>
-      <div className="absolute scale top-[50%] right-[-10%]">
+      <div className="absolute scale top-[50%]  portrait:right-[-2.5vw] landscape:right-[-2.5vw]">
         <CarouselNext />
       </div>
-      <div className="absolute top-[50%] left-[5%] portrait:-translate-x-[39vh] landscape:-translate-x-[39vw]">
+      <div className="absolute top-[50%]   portrait:left-[1.5vh] landscape:left-[1.5vw] portrait:-translate-x-[39.5vh] landscape:-translate-x-[39.5vw]">
         <CarouselPrevious />
       </div>
     </Carousel>

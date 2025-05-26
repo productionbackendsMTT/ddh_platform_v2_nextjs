@@ -10,7 +10,7 @@ import Autoplay from "embla-carousel-autoplay"
 import Image from 'next/image'
 import useStore from '@/app/zustand/Store'
 
-const FeatureGames = () => {
+const FeatureGames = ({featuregame}:{ featuregame: { image: string, slug: string;  id: number}[] }) => {
     const isSwiped = useStore((state) => state.initialState.isSwiped)
 
     return (
@@ -21,16 +21,18 @@ const FeatureGames = () => {
                 }),
             ]} className="portrait:w-[20vh]  landscape:w-[20vw]">
                 <CarouselContent>
-                    {Array.from({ length: 6 }).map((_, index) => (
+                    {featuregame?.map((game, index) => (
                         <CarouselItem key={index}>
                             <div
                                 key={index}
                                 className="relative"
                             >
                                 <GameCard
+                                    frame={'/assets/images/boder.webp'}
+                                    games={game}
                                     isFrame={false}
-                                    ImageClass="portrait:rounded-[5vh]  py-[.3vw] landscape:rounded-[5vw]"
-                                    StylesClass="portrait:w-[17vh] portrait:h-[27vh] landscape:w-[17vw] landscape:h-[27vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
+                                    ImageClass="portrait:rounded-[5.5vh]  landscape:rounded-[5.5vw] portrait:p-[.6vh] landscape:p-[.6vw]"
+                                    StylesClass="portrait:w-[19.7vh] portrait:h-[32vh] landscape:w-[19.7vw] landscape:h-[32vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
                                 />
                             </div>
                         </CarouselItem>

@@ -14,7 +14,7 @@ const Modal = ({ children,closeModal}: ModalProps) => {
   }, []);
 
   return (
-    <div onClick={closeModal} className="fixed inset-0 z-[99] flex items-center justify-center backdrop-blur-xs">
+    <div onClick={closeModal} className="fixed inset-0 z-[200] flex items-center justify-center backdrop-blur-xs">
       <div
         className={`
           relative w-auto h-auto p-4
