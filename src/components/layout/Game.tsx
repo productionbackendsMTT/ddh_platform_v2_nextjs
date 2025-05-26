@@ -31,6 +31,11 @@ const Game = async () => {
       id:5,
       image: '/assets/images/normal2.png',
       slug: 'viking',
+    },
+    {
+      id:6,
+      image: '/assets/images/normal2.png',
+      slug: 'viking',
     }
   ]
 
