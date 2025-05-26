@@ -16,6 +16,21 @@ const Game = async () => {
       id:2,
       image: '/assets/images/normal2.png',
       slug: 'viking',
+    },
+    {
+      id:3,
+      image: '/assets/images/normal2.png',
+      slug: 'viking',
+    },
+    {
+      id:4,
+      image: '/assets/images/normal2.png',
+      slug: 'viking',
+    },
+    {
+      id:5,
+      image: '/assets/images/normal2.png',
+      slug: 'viking',
     }
   ]
 
@@ -75,9 +90,9 @@ const Game = async () => {
     }
   ]
   return (
-    <div className='flex w-[98%] z-[8] mx-auto items-center justify-between px-[2vw]'>
+    <div className='flex w-[98%] z-[8] mx-auto items-center justify-between portrait:px-[2.6vh] landscape:px-[2vw]'>
       <FeatureGames featuregame={featuregame}/>
-      <div className='flex items-center justify-between  portrait:gap-x-[1.6vh] landscape:gap-x-[1.6vw]'>
+      <div className='flex items-center justify-between  portrait:gap-x-[1.9vh] landscape:gap-x-[1.6vw]'>
         <HotGames hotgame={hotgame}/>
         <NormalGames normalGames={normalgame} />
       </div>

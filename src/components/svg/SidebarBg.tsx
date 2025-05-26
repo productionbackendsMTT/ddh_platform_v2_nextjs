@@ -2,8 +2,7 @@ import React from 'react'
 
 const SidebarBg = () => {
     return (
-        <div className='relative h-full  w-full'>
-            <svg className='portrait:w-[23.5vh]  landscape:w-[23.5vw] h-full absolute left-0 top-0 ' viewBox="0 0 477 941" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className='w-full object-contain h-full left-0 top-0 ' viewBox="0 0 477 941" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_28_653)">
                     <path d="M449 943C406.883 536.252 406.736 382.692 449 21H-1V943H449Z" fill="url(#paint0_linear_28_653)" />
                     <path d="M449 943C406.883 536.252 406.736 382.692 449 21H-1V943H449Z" stroke="url(#paint1_linear_28_653)" strokeWidth="4" />
@@ -40,7 +39,6 @@ const SidebarBg = () => {
                     </linearGradient>
                 </defs>
             </svg>
-        </div>
     )
 }
 
