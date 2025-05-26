@@ -2,15 +2,70 @@
 import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
+import Notification from "./Notification"
 
 export default function LoginForm() {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        console.log("Login attempt with:", username)
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        router.push('/');
+        // setIsLoading(true);
+
+        // const formData = new FormData(event.currentTarget);
+        // const username = formData.get("username") as string;
+        // const password = formData.get("password") as string;
+
+
+        // try {
+        //     const response = await fetch('/api/auth/login', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({ username, password }),
+        //         credentials: 'include'
+        //     })
+
+        //     const data = await response.json();
+
+        //     if (!response.ok) {
+        //         toast.custom((t) => (
+        //             <Notification
+        //                 className="sm:rotate-0 -rotate-90"
+        //                 visible={t.visible}
+        //                 message={data.error?.message || 'Login failed'}
+        //             />
+        //         ));
+        //         setTimeout(() => {
+        //             toast.remove();
+        //         }, 2000);
+        //     } else {
+        //         toast.custom((t) => (
+        //             <Notification
+        //                 className="sm:rotate-0 -rotate-90"
+        //                 visible={t.visible}
+        //                 message={'Login successful'}
+        //             />
+        //         ));
+        //         setTimeout(() => {
+        //             toast.remove();
+        //         }, 2000);
+        //         router.push('/');
+        //     }
+
+        // } catch (error) {
+        //     toast.error(
+        //         'Failed to login'
+        //     );
+        // } finally {
+        //     setIsLoading(false);
+        // }
     }
+
 
     return (
         <form onSubmit={handleSubmit} className="portrait:space-y-[2.5vh] landscape:space-y-[2.5vw]">
@@ -18,9 +73,8 @@ export default function LoginForm() {
                 <input
                     type="text"
                     placeholder="Username"
-                    value={username}
-                    required
-                    onChange={(e) => setUsername(e.target.value)}
+                    // required
+                    name="username"
                     className="w-full  landscape:border-[.1vw] portrait:border-[.1vh]  border-[#BCE4FE] text-white tracking-wide portrait:placeholder:text-[3.5vh] portrait:py-[1vh] landscape:placeholder:text-[2.8vw] landscape:py-[.1vw] portrait:px-[3vh] portrait:text-[3vh] landscape:text-[2.8vw]  landscape:px-[2vw]  rounded-full custom-placeholder praise focus:outline-none landscape:focus:ring-[.1vw] portrait:focus:ring-[.1vh] focus:ring-purple-400 "
                 />
             </div>
@@ -29,9 +83,8 @@ export default function LoginForm() {
                 <input
                     type="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    // required
+                    name="password"
                     className="w-full  landscape:border-[.1vw] portrait:border-[.1vh]  border-[#BCE4FE] text-white tracking-wide portrait:placeholder:text-[3.5vh] portrait:py-[1vh] landscape:placeholder:text-[2.8vw] landscape:py-[.1vw] portrait:px-[3vh] portrait:text-[3vh] landscape:text-[2.8vw]  landscape:px-[2vw]  rounded-full custom-placeholder praise focus:outline-none landscape:focus:ring-[.1vw] portrait:focus:ring-[.1vh] focus:ring-purple-400 "
                 />
             </div>

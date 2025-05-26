@@ -7,22 +7,34 @@ import {
     CarouselItem,
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
+import Image from 'next/image'
+import useStore from '@/app/zustand/Store'
 
-const FeatureGames = () => {
+const FeatureGames = ({featuregame}:{ featuregame: { image: string, slug: string;  id: number}[] }) => {
+    const isSwiped = useStore((state) => state.initialState.isSwiped)
+
     return (
-        <div className=''>
+        !isSwiped && <div className=''>
             <Carousel plugins={[
                 Autoplay({
                     delay: 2000,
                 }),
-            ]} className="portrait:w-[20vh] landscape:w-[20vw]">
+            ]} className="portrait:w-[20vh]  landscape:w-[20vw]">
                 <CarouselContent>
-                    {Array.from({ length: 6 }).map((_, index) => (
-                        <CarouselItem key={index} >
-
-                                <div className='bg-[#9e229c]  portrait:w-[15.7vh]  portrait:h-[25.8vh] portrait:rounded-[3.5vh] portrait:p-[.37vh] landscape:p-[.37vw] landscape:rounded-[3.4vw] landscape:w-[15.7vw] landscape:h-[25.8vw]'>
-                                    <GameCard isFrame={true} key={index} ImageClass={'portrait:rounded-[3.5vh] portrait:p-[.35vh] landscape:p-[.35vw] landscape:rounded-[3.4vw]'} StylesClass={'portrait:w-[15vh] bg-transparant portrait:h-[25vh] landscape:w-[15vw] landscape:h-[25vw]'} />
-                                </div>
+                    {featuregame?.map((game, index) => (
+                        <CarouselItem key={index}>
+                            <div
+                                key={index}
+                                className="relative"
+                            >
+                                <GameCard
+                                    frame={'/assets/images/boder.webp'}
+                                    games={game}
+                                    isFrame={false}
+                                    ImageClass="portrait:rounded-[5.5vh]  landscape:rounded-[5.5vw] portrait:p-[.6vh] landscape:p-[.6vw]"
+                                    StylesClass="portrait:w-[19.7vh] portrait:h-[32vh] landscape:w-[19.7vw] landscape:h-[32vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
+                                />
+                            </div>
                         </CarouselItem>
                     ))}
                 </CarouselContent>

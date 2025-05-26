@@ -1,20 +1,32 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-const GameCard = ({ StylesClass,ImageClass,Cardkey,isFrame }: any) => {
-    return (
-        <div key={Cardkey} className={`relative  ${isFrame && 'box'} transition-all cursor-pointer ${StylesClass} `}>
-            
-            <Image
-                src={'/assets/images/viking.png'}
-                alt='viking'
-                fill
-                quality={100}
-                priority
-                className={`w-full  h-full ${ImageClass}`}
-            />
-        </div>
-    )
+const GameCard = ({ StylesClass, ImageClass, games,frame }: any) => {
+  return (
+    <Link
+      href={`/${games?.slug}`}
+      key={games?.id}
+      className={`relative block cursor-pointer ${StylesClass}`}
+    >
+      <Image
+        src={frame}
+        alt='border'
+        fill
+        priority
+        style={{ objectFit: 'cover', zIndex: 10 }}
+      />
+
+      <Image
+        src={games?.image}
+        alt='game'
+        fill
+        priority
+        className={ImageClass}
+        style={{ objectFit: 'cover', zIndex: 5 }}
+      />
+    </Link>
+  )
 }
 
 export default GameCard

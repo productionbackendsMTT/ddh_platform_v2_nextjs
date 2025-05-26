@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 
 export const metadata: Metadata = {
@@ -14,17 +15,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <head>
+      <head>
         <link rel="icon" href="/favicon.png" sizes="any" />
-        <link href="https://fonts.googleapis.com/css2?family=Praise&family=Salsa&display=swap" rel="stylesheet"/>
-    </head>
-    <body>
-      <div className="relative w-screen h-screen bg-[#790b73cd] cursor-custom">
-        <div className="absolute top-1/2 left-1/2 rotate-90 sm:rotate-0 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[100vh] h-[100vw] sm:w-screen sm:h-screen">
-          {children}
+        <link href="https://fonts.googleapis.com/css2?family=Praise&family=Salsa&display=swap" rel="stylesheet" />
+      </head>
+      <body>
+        <div className="relative w-screen h-screen bg-[#790b73cd] cursor-custom">
+          <div className="absolute top-1/2 left-1/2 rotate-90 sm:rotate-0 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[100vh] h-[100vw] sm:w-screen sm:h-screen">
+            {children}
+            <Toaster
+              containerClassName="m-0 flex items-center justify-center"
+              containerStyle={{
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+              }}
+              toastOptions={{
+                duration: 1,
+              }}
+            />
+          </div>
         </div>
-      </div>
-    </body>
-  </html>
+      </body>
+    </html>
   );
 }
