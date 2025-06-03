@@ -6,6 +6,7 @@ import { fetchGames } from '@/lib/action'
 
 const Game = async () => {
   const games = await fetchGames();
+  console.log(games,"games")
   const normalgame = [
     {
       id:1,
@@ -96,10 +97,10 @@ const Game = async () => {
   ]
   return (
     <div className='flex w-[98%] z-[8] mx-auto items-center justify-between portrait:px-[2.6vh] landscape:px-[2vw]'>
-      <FeatureGames featuregame={featuregame}/>
+      {/* <FeatureGames featuregame={featuregame}/> */}
       <div className='flex items-center justify-between  portrait:gap-x-[1.9vh] landscape:gap-x-[1.6vw]'>
-        <HotGames hotgame={hotgame}/>
-        <NormalGames normalGames={normalgame} />
+        {/* <HotGames hotgame={hotgame}/> */}
+        <NormalGames normalGames={games?.data?.data} />
       </div>
     </div>
   )
