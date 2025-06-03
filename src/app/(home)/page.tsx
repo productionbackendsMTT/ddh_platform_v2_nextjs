@@ -1,4 +1,3 @@
-import Announcements from "@/components/layout/Announcements";
 import Footer from "@/components/layout/Footer";
 import Game from "@/components/layout/Game";
 import Header from "@/components/layout/Header";
@@ -20,7 +19,6 @@ const Home = async () => {
       <Sidebar />
       <div className="flex  flex-col h-full w-full justify-between">
         <Header />
-        {/* <Announcements /> */}
         <Game />
         <Footer />
       </div>
