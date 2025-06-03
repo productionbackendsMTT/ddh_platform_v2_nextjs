@@ -1,3 +1,5 @@
+import { SSEProvider } from "@/lib/context/SSE";
+import { getCookie } from "@/lib/cookies";
 
 export const metadata = {
   title: "DingDing",
@@ -10,9 +12,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  const token = await getCookie();
   return (
     <main className="relative w-full h-full flex items-center justify-center flex-col">
-      {children}
+        <SSEProvider authToken={token}>
+        {children}
+        </SSEProvider >
     </main>
   );
 }

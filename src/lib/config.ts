@@ -1,6 +1,7 @@
 const _config = {
-    server: process.env.NEXT_PUBLIC_SERVER_URL || 'http://13.233.117.33:5000',
-    nodeenv: process.env.NODE_ENV
+    server: process.env.NEXT_PUBLIC_SERVER_URL,
+    nodeenv: process.env.NEXT_PUBLIC_NODE_ENV,
+    loader:process.env.NEXT_PUBLIC_LOADER_URL
 };
 
 export const config = Object.freeze(_config);

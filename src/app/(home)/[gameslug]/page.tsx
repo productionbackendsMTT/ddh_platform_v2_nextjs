@@ -1,17 +1,12 @@
-import { getGameUrl } from "@/lib/action";
+import GameFrame from '@/components/games/GameFrame'
+import { getGameUrl } from '@/lib/action';
+import React from 'react'
 
+const page = async({ params }: any) => {
+  const { gameslug } = await params
+  const gameurl = await getGameUrl(gameslug);
 
-const page = async ({ params }: any) => {
-  const url = await getGameUrl(params?.gameslug);
-    return (
-      <iframe
-        src={url?.data}
-        width="100%"
-        height="100%"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
-    );
-  };
-  
-  export default page;
+  return (<GameFrame gameurl={gameurl?.data} />)
+}
+
+export default page

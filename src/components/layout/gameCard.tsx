@@ -18,7 +18,7 @@ const GameCard = ({ StylesClass, ImageClass, games,frame }: any) => {
       />
 
       <Image
-        src={games?.image}
+        src={games?.thumbnail}
         alt='game'
         fill
         priority

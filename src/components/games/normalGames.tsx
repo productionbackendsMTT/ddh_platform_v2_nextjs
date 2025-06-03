@@ -34,7 +34,10 @@ interface NormalGamesProps {
   normalGames: GameData[];
 }
 
-const NormalGames = ({ normalGames }: { normalGames: { image: string, slug: string;  id: number}[] }) => {
+const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
+  
+  console.log(normalGames,"normalGames")
+
   const { setSwiped } = useStore()
   const isSwiped = useStore((state) => state.initialState.isSwiped)
   const markerRef = useRef<HTMLDivElement>(null)
@@ -53,59 +56,61 @@ const NormalGames = ({ normalGames }: { normalGames: { image: string, slug: stri
 
   const chunkedGames = useMemo(() => chunkArray(normalGames, isSwiped ? 5 : 2), [normalGames, isSwiped, chunkArray])
 
-  useEffect(() => {
-    if (!isSwiped && api) {
-      const onSelect = () => {
-        const currentIndex = api.selectedScrollSnap();
-        if (currentIndex !== prevIndexRef.current) {
-          setSwiped(currentIndex < 0 ? false : true);
-          prevIndexRef.current = currentIndex;
-        }
-      };
+  // useEffect(() => {
+  //   if (!isSwiped && api) {
+  //     const onSelect = () => {
+  //       const currentIndex = api.selectedScrollSnap();
+  //       if (currentIndex !== prevIndexRef.current) {
+  //         setSwiped(currentIndex < 0 ? false : true);
+  //         prevIndexRef.current = currentIndex;
+  //       }
+  //     };
 
-      api.on('select', onSelect);
+  //     api.on('select', onSelect);
 
-      // Return a cleanup function
-      return () => {
-        api.off('select', onSelect);
-      };
-    }
+  //     // Return a cleanup function
+  //     return () => {
+  //       api.off('select', onSelect);
+  //     };
+  //   }
 
-    // Explicitly return undefined if the condition is not met
-    return undefined;
-  }, [api, isSwiped, setSwiped]);
+  //   // Explicitly return undefined if the condition is not met
+  //   return undefined;
+  // }, [api, isSwiped, setSwiped]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target === markerRef.current) {
-            if (entry.isIntersecting) {
-              setSwiped(false)
-            } else {
-              setSwiped(false)
-            }
-          }
-        })
-      },
-      { root: null, rootMargin: '0px', threshold: 0.1 }
-    )
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.target === markerRef.current) {
+  //           if (entry.isIntersecting) {
+  //             setSwiped(false)
+  //           } else {
+  //             setSwiped(false)
+  //           }
+  //         }
+  //       })
+  //     },
+  //     { root: null, rootMargin: '0px', threshold: 0.1 }
+  //   )
 
-    if (markerRef.current) {
-      observer.observe(markerRef.current)
-    }
+  //   if (markerRef.current) {
+  //     observer.observe(markerRef.current)
+  //   }
 
-    return () => {
-      if (markerRef.current) {
-        observer.unobserve(markerRef.current)
-      }
-    }
-  }, [setSwiped])
+  //   return () => {
+  //     if (markerRef.current) {
+  //       observer.unobserve(markerRef.current)
+  //     }
+  //   }
+  // }, [setSwiped])
 
+  // ${!isSwiped ? 'landscape:w-[92vw] portrait:w-[92vh]' : 'portrait:w-[35vh] landscape:w-[35vw]'
   return (
     <Carousel
       setApi={setApi}
-      className={`relative  transition-all  duration-300 ease-in-out ${isSwiped ? 'landscape:w-[92vw] portrait:w-[92vh]' : 'portrait:w-[35vh] landscape:w-[35vw]'
+      className={`relative  transition-all  duration-300 ease-in-out 
+      landscape:w-[92vw] portrait:w-[92vh]
         }`}
     >
       <CarouselContent>
@@ -148,12 +153,12 @@ const NormalGames = ({ normalGames }: { normalGames: { image: string, slug: stri
           </div>
         ))}
       </CarouselContent>
-      <div className="absolute scale top-[50%]  portrait:right-[-6vw] landscape:right-[-2.5vw]">
+      {/* <div className="absolute scale top-[50%]  portrait:right-[-6vw] landscape:right-[-2.5vw]">
         <CarouselNext />
       </div>
       <div className="absolute top-[50%]   portrait:left-[1.5vh] landscape:left-[1.5vw] portrait:-translate-x-[40vh] landscape:-translate-x-[39.5vw]">
         <CarouselPrevious />
-      </div>
+      </div> */}
     </Carousel>
   )
 }

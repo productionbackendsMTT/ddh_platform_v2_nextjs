@@ -13,57 +13,57 @@ export default function LoginForm() {
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         router.push('/');
-        // setIsLoading(true);
+        setIsLoading(true);
 
-        // const formData = new FormData(event.currentTarget);
-        // const username = formData.get("username") as string;
-        // const password = formData.get("password") as string;
+        const formData = new FormData(event.currentTarget);
+        const username = formData.get("username") as string;
+        const password = formData.get("password") as string;
 
 
-        // try {
-        //     const response = await fetch('/api/auth/login', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({ username, password }),
-        //         credentials: 'include'
-        //     })
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password }),
+                credentials: 'include'
+            })
 
-        //     const data = await response.json();
+            const data = await response.json();
 
-        //     if (!response.ok) {
-        //         toast.custom((t) => (
-        //             <Notification
-        //                 className="sm:rotate-0 -rotate-90"
-        //                 visible={t.visible}
-        //                 message={data.error?.message || 'Login failed'}
-        //             />
-        //         ));
-        //         setTimeout(() => {
-        //             toast.remove();
-        //         }, 2000);
-        //     } else {
-        //         toast.custom((t) => (
-        //             <Notification
-        //                 className="sm:rotate-0 -rotate-90"
-        //                 visible={t.visible}
-        //                 message={'Login successful'}
-        //             />
-        //         ));
-        //         setTimeout(() => {
-        //             toast.remove();
-        //         }, 2000);
-        //         router.push('/');
-        //     }
+            if (!response.ok) {
+                toast.custom((t) => (
+                    <Notification
+                        className="sm:rotate-0 -rotate-90"
+                        visible={t.visible}
+                        message={data.error?.message || 'Login failed'}
+                    />
+                ));
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
+            } else {
+                toast.custom((t) => (
+                    <Notification
+                        className="sm:rotate-0 -rotate-90"
+                        visible={t.visible}
+                        message={'Login successful'}
+                    />
+                ));
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
+                router.push('/');
+            }
 
-        // } catch (error) {
-        //     toast.error(
-        //         'Failed to login'
-        //     );
-        // } finally {
-        //     setIsLoading(false);
-        // }
+        } catch (error) {
+            toast.error(
+                'Failed to login'
+            );
+        } finally {
+            setIsLoading(false);
+        }
     }
 
 
