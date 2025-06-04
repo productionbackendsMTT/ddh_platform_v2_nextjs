@@ -1,16 +1,12 @@
 'use client'
 import React from 'react'
 import GameCard from '../layout/gameCard'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel"
 import Image from 'next/image'
 import useStore from '@/app/zustand/Store'
+import { Carousel, CarouselContent, CarouselItem } from '../ui/hotGameCarousel'
 
 const HotGames = ({hotgame}:{ hotgame: { image: string, slug: string;  id: number}[] }) => {
-  const isSwiped = useStore((state) => state.initialState.isSwiped)
+  const isSwiped = useStore((state) => state.initialState.SwipedIndex)
   const hotGame = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
   const chunkArray = (arr: any, size: number) => {
@@ -24,7 +20,7 @@ const HotGames = ({hotgame}:{ hotgame: { image: string, slug: string;  id: numbe
   const chunkedHotGames = chunkArray(hotgame, 6);
 
   return (
-   !isSwiped && <Carousel
+   isSwiped===0 && <Carousel
 
       className="portrait:pt-[2vh]   portrait:px-[2vh] landscape:px-[2vw] landscape:pt-[2.5vw] bg-[url('/assets/images/hotgames_bg.png')] bg-cover bg-no-repeat bg-center portrait:w-[31vh] portrait:h-[28vh] landscape:w-[32vw] landscape:h-[29vw]"
     >

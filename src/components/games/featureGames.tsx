@@ -1,20 +1,15 @@
 'use client'
 import React from 'react'
 import GameCard from '../layout/gameCard'
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-} from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
-import Image from 'next/image'
 import useStore from '@/app/zustand/Store'
+import { Carousel, CarouselContent, CarouselItem } from '../ui/featuredGameCarousel'
 
 const FeatureGames = ({featuregame}:{ featuregame: { image: string, slug: string;  id: number}[] }) => {
-    const isSwiped = useStore((state) => state.initialState.isSwiped)
+    const isSwiped = useStore((state) => state.initialState.SwipedIndex)
 
     return (
-        !isSwiped && <div className=''>
+        (isSwiped===0) && <div className=''>
             <Carousel plugins={[
                 Autoplay({
                     delay: 2000,

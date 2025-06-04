@@ -20,7 +20,6 @@ const Home = async () => {
       <Sidebar />
       <div className="flex  flex-col h-full w-full justify-between">
         <Header />
-        {/* <Announcements /> */}
         <Game />
         <Footer />
       </div>

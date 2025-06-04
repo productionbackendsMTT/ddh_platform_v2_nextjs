@@ -8,7 +8,6 @@ const LogoutModal = () => {
         <p className="portrait:mb-[1.5vh] landscape:mb-[1.5vw] landscape:text-[1.2vw] portrait:text-[1.2vh] text-white">You are about to log out of your account.</p>
         <div className="flex justify-center portrait:space-x-[1vh] landscape:space-x-[1vw]">
           <button
-            // onClick={onCancel}
             className="bg-gradient-to-r from-pink-500 landscape:text-[1vw] portrait:text-[1vh] to-purple-600 hover:brightness-110 text-white font-bold landscape:py-[.4vw] portrait:py-[.4vh] landscape:px-[1vw] portrait:px-[1vh] rounded-full  transition duration-300"
           >
             Cancel

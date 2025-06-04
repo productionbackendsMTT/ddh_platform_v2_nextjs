@@ -7,6 +7,7 @@ import useEmblaCarousel, {
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import useStore from "@/app/zustand/Store";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -68,42 +69,44 @@ const Carousel = React.forwardRef<
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
+    const { setSwipedIndex } = useStore();
 
-    const startY = React.useRef<number | null>(null);
-    const currentY = React.useRef<number | null>(null);
+    const startX = React.useRef<number | null>(null);
+    const currentX = React.useRef<number | null>(null);
 
     const handleTouchStart = (event: React.TouchEvent) => {
-      startY.current = event.touches[0].clientY;
+      startX.current = event.touches[0].clientX;
     };
 
     const handleTouchMove = (event: React.TouchEvent) => {
-      currentY.current = event.touches[0].clientY;
+      currentX.current = event.touches[0].clientX;
     };
 
     const handleTouchEnd = () => {
-      if (startY.current !== null && currentY.current !== null) {
-        const diff = startY.current - currentY.current;
+      if (startX.current !== null && currentX.current !== null && api) {
+        const diff = startX.current - currentX.current;
+        const currentIndex = api.selectedScrollSnap();
 
         if (Math.abs(diff) > 30) {
           if (diff > 0) {
-            api?.scrollNext();
+            api.scrollNext();
           } else {
-            api?.scrollPrev();
+            api.scrollPrev();
           }
         }
       }
 
-      startY.current = null;
-      currentY.current = null;
+      startX.current = null;
+      currentX.current = null;
     };
 
     const onSelect = React.useCallback(
       (api: CarouselApi) => {
-        if (!api) {
-          return;
-        }
-
+        if (!api) return;
         const selectedIndex = api.selectedScrollSnap();
+        if (selectedIndex!==0) {
+          setSwipedIndex(selectedIndex);          
+        }
         setCanScrollPrev(api.canScrollPrev());
         setCanScrollNext(api.canScrollNext());
         onSlideChange?.(selectedIndex);
@@ -130,7 +133,7 @@ const Carousel = React.forwardRef<
       <CarouselContext.Provider
         value={{
           carouselRef,
-          api: api,
+          api,
           opts,
           orientation:
             orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
@@ -223,8 +226,13 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-        <Image src={'/assets/images/arrow.png'} alt="arrow-right" width={300} height={1300} className="w-full h-full"/>
-
+      <Image
+        src={"/assets/images/arrow.png"}
+        alt="arrow-left"
+        width={300}
+        height={1300}
+        className="w-full h-full"
+      />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -242,7 +250,7 @@ const CarouselNext = React.forwardRef<
       ref={ref}
       size={size}
       className={cn(
-        "absolute landscaope:h-[2.5vw] portrait:h-[2.5vh] landscape:w-[2.5vw] hover:scale-110 cursor-pointer portrait:w-[2.5vh]  rounded-full transition-transform duration-600",
+        "absolute landscape:h-[2.5vw] portrait:h-[2.5vh] landscape:w-[2.5vw] hover:scale-110 cursor-pointer portrait:w-[2.5vh] rounded-full transition-transform duration-600",
         orientation === "horizontal"
           ? "-right-0 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -252,7 +260,13 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <Image src={'/assets/images/arrow.png'} alt="arrow-right" width={300} height={300}  className="rotate-[180deg] h-ful w-full"/>
+      <Image
+        src={"/assets/images/arrow.png"}
+        alt="arrow-right"
+        width={300}
+        height={300}
+        className="rotate-[180deg] h-full w-full"
+      />
       <span className="sr-only">Next slide</span>
     </Button>
   );

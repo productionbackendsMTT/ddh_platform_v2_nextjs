@@ -6,100 +6,11 @@ import { fetchGames } from '@/lib/action'
 
 const Game = async () => {
   const games = await fetchGames();
-  console.log(games,"games")
-  const normalgame = [
-    {
-      id:1,
-      image: '/assets/images/normal1.png',
-      slug: 'viking',
-    },
-    {
-      id:2,
-      image: '/assets/images/normal2.png',
-      slug: 'viking',
-    },
-    {
-      id:3,
-      image: '/assets/images/normal2.png',
-      slug: 'viking',
-    },
-    {
-      id:4,
-      image: '/assets/images/normal2.png',
-      slug: 'viking',
-    },
-    {
-      id:5,
-      image: '/assets/images/normal2.png',
-      slug: 'viking',
-    },
-    {
-      id:6,
-      image: '/assets/images/normal2.png',
-      slug: 'viking',
-    }
-  ]
-
-  const featuregame = [
-    {
-      id:1,
-      image: '/assets/images/viking.png',
-      slug: 'viking',
-    },
-    {
-      id:2,
-      image: '/assets/images/viking.png',
-      slug: 'viking',
-    },
-    {
-      id:3,
-      image: '/assets/images/viking.png',
-      slug: 'viking',
-    },
-    {
-      id:4,
-      image: '/assets/images/viking.png',
-      slug: 'viking',
-    }
-  ]
-
-  const hotgame = [
-    {
-      id:1,
-      image: '/assets/images/crazy777.png',
-      slug: 'viking',
-    },
-    {
-      id:2,
-      image: '/assets/images/china_town.png',
-      slug: 'viking',
-    },
-    {
-      id:3,
-      image: '/assets/images/fisherman.png',
-      slug: 'viking',
-    },
-    {
-      id:4,
-      image: '/assets/images/sizzling_moon.png',
-      slug: 'viking',
-    },
-    {
-      id:5,
-      image: '/assets/images/blood_eternal.png',
-      slug: 'viking',
-    },
-    {
-      id:5,
-      image: '/assets/images/golden_slots.png',
-      slug: 'viking',
-    }
-  ]
   return (
-    <div className='flex w-[98%] z-[8] mx-auto items-center justify-between portrait:px-[2.6vh] landscape:px-[2vw]'>
-      {/* <FeatureGames featuregame={featuregame}/> */}
-      <div className='flex items-center justify-between  portrait:gap-x-[1.9vh] landscape:gap-x-[1.6vw]'>
-        {/* <HotGames hotgame={hotgame}/> */}
+    <div className='flex w-[98%] z-[8] mx-auto items-center justify-between portrait:px-[2.6vh] landscape:px-[2vw] portrait:gap-x-[3.5vh] landscape:gap-x-[3.5vw]'>
+      <FeatureGames featuregame={games?.data?.data}/>
+      <div className='flex items-center justify-between  portrait:gap-x-[1.9vh]'>
+        <HotGames hotgame={games?.data?.data}/>
         <NormalGames normalGames={games?.data?.data} />
       </div>
     </div>

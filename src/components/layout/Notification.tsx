@@ -8,7 +8,6 @@ interface NotificationProps {
 }
 
 const Notification: React.FC<NotificationProps> = ({
-  visible,
   message,
   className,
 }) => {
