@@ -31,13 +31,12 @@ export default function LoginForm() {
             })
 
             const data = await response.json();
-
-            if (!response.ok) {
+                if (!response.ok) {
                 toast.custom((t) => (
                     <Notification
                         className="sm:rotate-0 -rotate-90"
                         visible={t.visible}
-                        message={data.error?.message || 'Login failed'}
+                        message={data?.message || 'Login failed'}
                     />
                 ));
                 setTimeout(() => {
