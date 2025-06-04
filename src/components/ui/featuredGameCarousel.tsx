@@ -104,9 +104,6 @@ const Carousel = React.forwardRef<
       (api: CarouselApi) => {
         if (!api) return;
         const selectedIndex = api.selectedScrollSnap();
-        if (selectedIndex!==0) {
-          setSwipedIndex(selectedIndex);          
-        }
         setCanScrollPrev(api.canScrollPrev());
         setCanScrollNext(api.canScrollNext());
         onSlideChange?.(selectedIndex);

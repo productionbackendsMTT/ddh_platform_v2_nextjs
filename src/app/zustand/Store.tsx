@@ -3,20 +3,20 @@ import { create } from 'zustand'
 // Define the type for the store
 interface State {
     initialState: {
-        isSwiped: boolean;
+        SwipedIndex:number;
   }
-  setSwiped: (value: boolean) => void
+  setSwipedIndex: (value: number) => void
 }
 
 // Create the store with type support
 const useStore = create<State>((set) => ({
     initialState: {
-        isSwiped: false
+      SwipedIndex: 0
     }
   ,
-  setSwiped: (value) =>
+  setSwipedIndex: (value) =>
     set(() => ({
-      initialState: { isSwiped: value }
+      initialState: { SwipedIndex: value }
     }))
 }))
 

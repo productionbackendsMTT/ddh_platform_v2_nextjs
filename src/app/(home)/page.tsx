@@ -8,24 +8,24 @@ export const fetchCache = 'force-no-store';
 
 const Home = async () => {
   return (
-    <Suspense fallback={<div>Loading platform...</div>}>
-      <section className="relative w-full h-full overflow-hidden">
-        <video
-          src={"/assets/video/city.mp4"}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="z-[-20] object-cover object-center top-0 left-0 absolute h-full w-full"
-        />
-        <Sidebar />
-        <div className="flex  flex-col h-full w-full justify-between">
-          <Header />
-          <Game />
-          <Footer />
-        </div>
-      </section>
-    </Suspense>
+    <section className="relative w-full h-full overflow-hidden">
+      <video
+        src={"/assets/video/city.mp4"}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="z-[-20] object-cover object-center top-0 left-0 absolute h-full w-full"
+      />
+      <Sidebar />
+      <div className="flex  flex-col h-full w-full justify-between">
+        <Header />
+        <Game />
+        <Footer />
+      </div>
+
+
+    </section>
   );
 };
 
