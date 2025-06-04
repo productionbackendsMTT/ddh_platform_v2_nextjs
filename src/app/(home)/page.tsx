@@ -1,8 +1,8 @@
-import Announcements from "@/components/layout/Announcements";
 import Footer from "@/components/layout/Footer";
 import Game from "@/components/layout/Game";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
+import { Suspense } from "react";
 export const dynamic = "force-dynamic";
 export const fetchCache = 'force-no-store';
 

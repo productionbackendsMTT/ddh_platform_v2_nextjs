@@ -12,6 +12,8 @@ const GameFrame: React.FC<GameFrameProps> = ({ gameurl }) => {
 
   useEffect(() => {
     // Optional: extract gameId from gameurl if needed
+    console.log(lastEvent?.type ,SSEEventType.GAME_STARTED,"lastEvent");
+
     const urlObj = new URL(gameurl);
     const gameId = urlObj.searchParams.get("gameId");
 
@@ -22,6 +24,7 @@ const GameFrame: React.FC<GameFrameProps> = ({ gameurl }) => {
       setGameConnected(true);
     }
   }, [lastEvent, gameurl]);
+
   return (
     <div className="w-full h-full relative">
       <iframe
