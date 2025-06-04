@@ -1,6 +1,8 @@
 import React from 'react'
 import NormalGames from '../games/normalGames'
 import { fetchGames } from '@/lib/action'
+import FeatureGames from '../games/featureGames';
+import HotGames from '../games/hotGames';
 
 const Game = async () => {
   const games = await fetchGames();
@@ -10,7 +12,8 @@ const Game = async () => {
       <div className='flex items-center justify-between  portrait:gap-x-[1.9vh]'>
         <HotGames hotgame={games?.data?.data}/>
         <NormalGames normalGames={games?.data?.data} />
-    </div>
+      </div>
+      </div>
   )
 }
 

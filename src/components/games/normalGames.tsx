@@ -10,6 +10,7 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel"
 import Image from 'next/image'
+import useStore from '@/app/zustand/Store'
 
 interface GameData {
   category: string;
