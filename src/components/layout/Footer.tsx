@@ -1,8 +1,6 @@
 'use client'
 import React, { useState } from "react";
 import Image from "next/image";
-import Navigation from "./Navigation";
-import FooterBg from "../svg/FooterBg";
 import Modal from "./Modal";
 import SpinWheelPopup from "../modals/spinWheelPopup";
 

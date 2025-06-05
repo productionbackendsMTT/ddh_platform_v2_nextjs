@@ -1,4 +1,4 @@
-interface GameData {
+export interface GameData {
     category: string;
     createdAt: string;
     description: string;

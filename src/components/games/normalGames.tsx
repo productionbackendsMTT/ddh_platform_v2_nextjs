@@ -7,7 +7,8 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious
+  CarouselPrevious,
+  useCarousel
 } from "@/components/ui/carousel"
 import Image from 'next/image'
 import useStore from '@/app/zustand/Store'
@@ -17,9 +18,10 @@ import { NormalGamesProps } from '@/lib/type'
 
 const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
   const isSwiped = useStore((state) => state.initialState.SwipedIndex)
+  const [isfull, setFull] = React.useState(false)
+  console.log(isfull,"asd")
   const {setSwipedIndex} = useStore()
   const invisibleTextRef = useRef<HTMLDivElement>(null)
-
   const chunkArray = useCallback((arr: any[], size: number) => {
     const result = []
     for (let i = 0; i < arr.length; i += size) {
@@ -29,7 +31,7 @@ const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
   }, [])
 
   const chunkedGames = useMemo(
-    () => chunkArray(normalGames, isSwiped === -1 ? 2 : 5),
+    () => chunkArray(normalGames, isSwiped === 0 ? 2 : 5),
     [normalGames,isSwiped, chunkArray]
   )
 
@@ -59,7 +61,7 @@ const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
   return (
     <Carousel
       className={`relative transition-all duration-300 ease-in-out 
-        ${isSwiped === -1 ? 'portrait:w-[35vh] landscape:w-[35vw]' : 'portrait:w-[92vh] landscape:w-[92vw]'}`}
+        ${isSwiped === 0 ? 'portrait:w-[35vh] landscape:w-[35vw]' : 'portrait:w-[92vh] landscape:w-[92vw]'}`}
     >
       <CarouselContent>
         <div ref={invisibleTextRef} className='absolute left-[-7vw] invisible'>
@@ -69,7 +71,7 @@ const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
         {chunkedGames.map((chunk, index) => (
           <CarouselItem
             key={index}
-            className="flex justify-center portrait:gap-x-[.9vh] landscape:gap-x-[.7vw]"
+            className="flex justify-start portrait:gap-x-[.9vh] landscape:gap-x-[.7vw]"
           >
             {chunk.map((game) => (
               <div key={game._id} className="relative">
