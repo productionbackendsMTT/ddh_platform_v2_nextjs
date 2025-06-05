@@ -4,13 +4,14 @@ import GameCard from '../layout/gameCard'
 import Autoplay from "embla-carousel-autoplay"
 import useStore from '@/app/zustand/Store'
 import { Carousel, CarouselContent, CarouselItem } from '../ui/featuredGameCarousel'
+import { NormalGamesProps } from '@/lib/type'
 
-const FeatureGames = ({featuregame}:{ featuregame: { image: string, slug: string;  id: number}[] }) => {
+const FeatureGames = ({ featuregame }: { featuregame: NormalGamesProps[] }) => {
     const isSwiped = useStore((state) => state.initialState.SwipedIndex)
 
     return (
-        (isSwiped===0) && <div className=''>
-            <Carousel plugins={[
+        (isSwiped === 0) && <div className=''>
+            <Carousel  plugins={[
                 Autoplay({
                     delay: 2000,
                 }),
