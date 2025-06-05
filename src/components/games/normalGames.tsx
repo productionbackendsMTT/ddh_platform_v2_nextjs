@@ -11,27 +11,9 @@ import {
 } from "@/components/ui/carousel"
 import Image from 'next/image'
 import useStore from '@/app/zustand/Store'
+import { NormalGamesProps } from '@/lib/type'
 
-interface GameData {
-  category: string;
-  createdAt: string;
-  description: string;
-  name: string;
-  order: number;
-  payout: string;
-  slug: string;
-  status: string;
-  tag: string;
-  thumbnail: string;
-  type: string;
-  updatedAt: string;
-  url: string;
-  _id: string;
-}
 
-interface NormalGamesProps {
-  normalGames: GameData[];
-}
 
 const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
   const isSwiped = useStore((state) => state.initialState.SwipedIndex)
