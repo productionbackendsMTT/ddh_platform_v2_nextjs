@@ -4,6 +4,7 @@ import { config } from "./config";
 import { getCookie } from "./cookies";
 
 export async function fetchGames(query?: any) {
+  console.log(query)
   try {
     const accessToken = await getCookie();
     const params = new URLSearchParams();

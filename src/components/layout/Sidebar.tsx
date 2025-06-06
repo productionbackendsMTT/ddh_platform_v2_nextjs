@@ -1,13 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SidebarBg from '../svg/SidebarBg';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Sidebar = () => {
     const [category, setCategory] = useState('all');
+    const router=useRouter();
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        router.push(`?category=${category}`);
+    },[category])
+
     const sidebar = [
         {
             name: 'all',

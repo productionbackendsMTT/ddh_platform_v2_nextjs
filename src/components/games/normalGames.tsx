@@ -1,14 +1,10 @@
 'use client'
-
 import React, { useCallback, useMemo, useEffect, useRef } from 'react'
 import GameCard from '../layout/gameCard'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  useCarousel
 } from "@/components/ui/carousel"
 import Image from 'next/image'
 import useStore from '@/app/zustand/Store'
@@ -18,8 +14,6 @@ import { NormalGamesProps } from '@/lib/type'
 
 const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
   const isSwiped = useStore((state) => state.initialState.SwipedIndex)
-  const [isfull, setFull] = React.useState(false)
-  console.log(isfull,"asd")
   const {setSwipedIndex} = useStore()
   const invisibleTextRef = useRef<HTMLDivElement>(null)
   const chunkArray = useCallback((arr: any[], size: number) => {
@@ -44,7 +38,7 @@ const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
           }
         });
       },
-      { root: null, threshold: 1.0 } // Fully visible in the viewport
+      { root: null, threshold: 1.0 } 
     );
 
     if (invisibleTextRef.current) {

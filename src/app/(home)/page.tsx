@@ -6,7 +6,8 @@ import { Suspense } from "react";
 export const dynamic = "force-dynamic";
 export const fetchCache = 'force-no-store';
 
-const Home = async () => {
+const Home = async ({ searchParams }: any) => {
+  const response = await searchParams
   return (
     <Suspense fallback={<div>Loading platform...</div>}>
       <section className="relative w-full h-full overflow-hidden">
@@ -21,7 +22,7 @@ const Home = async () => {
         <Sidebar />
         <div className="flex  flex-col h-full w-full justify-between">
           <Header />
-          <Game />
+          <Game category={response?.category}/>
           <Footer />
         </div>
       </section>

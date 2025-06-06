@@ -8,7 +8,6 @@ import { NormalGamesProps } from '@/lib/type'
 
 const FeatureGames = ({ featuregame }: { featuregame: NormalGamesProps[] }) => {
     const isSwiped = useStore((state) => state.initialState.SwipedIndex)
-
     return (
         (isSwiped === 0) && <div className=''>
             <Carousel plugins={[
