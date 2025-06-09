@@ -4,7 +4,6 @@ import { config } from "./config";
 import { getCookie } from "./cookies";
 
 export async function fetchGames(query?: any) {
-  console.log(query)
   try {
     const accessToken = await getCookie();
     const params = new URLSearchParams();
@@ -26,7 +25,7 @@ export async function fetchGames(query?: any) {
 
     const data = await response.json();
     if (!response.ok) {
-      throw new Error(data.error?.message || 'Failed to fetch transaction');
+      throw new Error(data.error?.message || 'Failed to fetch games');
     }
 
     return {
@@ -40,7 +39,7 @@ export async function fetchGames(query?: any) {
   } catch (error) {
     return {
       data: null,
-      error: error instanceof Error ? error.message : 'Failed to fetch transaction'
+      error: error instanceof Error ? error.message : 'Failed to fetch games'
     };
   }
 }

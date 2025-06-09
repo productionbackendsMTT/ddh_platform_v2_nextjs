@@ -2,6 +2,7 @@ import Footer from "@/components/layout/Footer";
 import Game from "@/components/layout/Game";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
+import Loader from "@/components/ui/Loader";
 import { Suspense } from "react";
 export const dynamic = "force-dynamic";
 export const fetchCache = 'force-no-store';
@@ -9,7 +10,7 @@ export const fetchCache = 'force-no-store';
 const Home = async ({ searchParams }: any) => {
   const response = await searchParams
   return (
-    <Suspense fallback={<div>Loading platform...</div>}>
+    <Suspense fallback={<Loader />}>
       <section className="relative w-full h-full overflow-hidden">
         <video
           src={"/assets/video/bg.mp4"}

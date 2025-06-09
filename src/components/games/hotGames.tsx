@@ -10,7 +10,7 @@ import Autoplay from "embla-carousel-autoplay"
 const HotGames = ({ hotgame }: { hotgame: { hot: NormalGamesProps[], popular: NormalGamesProps[], latest: NormalGamesProps[] } }) => {
   const isSwiped = useStore((state) => state.initialState.SwipedIndex)
   const label = useStore((state) => state.initialState.label)
-
+  
   const hotGames = hotgame?.hot || [];
   const latestGames = hotgame?.latest || [];
   const popularGames = hotgame?.popular || [];
@@ -18,8 +18,9 @@ const HotGames = ({ hotgame }: { hotgame: { hot: NormalGamesProps[], popular: No
   const categories = [
     { name: 'Popular Games', games: popularGames },
     { name: 'Hot Games', games: hotGames },
-    { name: 'Latest Games', games: latestGames }
+    { name: 'Latest Games', games: latestGames}
   ];
+
 
   return (
     isSwiped === 0 && <Carousel

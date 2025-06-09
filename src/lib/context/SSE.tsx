@@ -176,7 +176,7 @@ export const SSEProvider: React.FC<SSEProviderProps> = ({
       });
 
       eventSource.onerror = (error) => {
-        console.error('SSE: Connection error', error);
+        // console.error('SSE: Connection error', error);
         setIsConnected(false);
         eventSource.close();
         eventSourceRef.current = null;

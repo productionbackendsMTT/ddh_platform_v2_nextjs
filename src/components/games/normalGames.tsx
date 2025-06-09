@@ -12,7 +12,7 @@ import { NormalGamesProps } from '@/lib/type'
 
 
 
-const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
+const NormalGames = ({ normalGames,isCategory }: { normalGames: NormalGamesProps[],isCategory?:undefined|string }) => {
   const isSwiped = useStore((state) => state.initialState.SwipedIndex)
   const {setSwipedIndex} = useStore()
   const invisibleTextRef = useRef<HTMLDivElement>(null)
@@ -25,8 +25,8 @@ const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
   }, [])
 
   const chunkedGames = useMemo(
-    () => chunkArray(normalGames, isSwiped === 0 ? 2 : 5),
-    [normalGames,isSwiped, chunkArray]
+    () => chunkArray(normalGames, ((isSwiped === 0)&&(isCategory==='all')) ? 2 : 5),
+    [normalGames,isSwiped,isCategory, chunkArray]
   )
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
   return (
     <Carousel
       className={`relative transition-all duration-300 ease-in-out 
-        ${isSwiped === 0 ? 'portrait:w-[35vh] landscape:w-[35vw]' : 'portrait:w-[92vh] landscape:w-[92vw]'}`}
+        ${(isSwiped === 0)&&(isCategory==='all') ? 'portrait:w-[35vh] landscape:w-[35vw]' : 'portrait:w-[92vh] landscape:w-[92vw]'}`}
     >
       <CarouselContent>
         <div ref={invisibleTextRef} className='absolute left-[-7vw] invisible'>
@@ -84,6 +84,7 @@ const NormalGames = ({ normalGames }: { normalGames: NormalGamesProps[] }) => {
                   quality={100}
                   className="absolute z-[10] cursor-pointer hover:scale-110 top-[10%] right-[10%] portrait:w-[2.5vh] portrait:h-[2.5vh] landscape:w-[2.5vw] landscape:h-[2.5vw]"
                 />
+                <div className="absolute z-[8] cursor-pointer hover:scale-110 top-[10%] left-[5%] rounded-tr-[1.7vw] bg-[#AD1716] border border-[#E36CD9] px-[1.4vw] py-[.4vw]"><span className='capitalize bg-gradient-to-t from-[#D7BF7C] via-[#F9F2DB] portrait:text-[.9vh] landscape:text-[.9vw] to-[#A98E44] font-bold bg-clip-text text-transparent'>{game?.type}</span></div>
               </div>
             ))}
           </CarouselItem>
