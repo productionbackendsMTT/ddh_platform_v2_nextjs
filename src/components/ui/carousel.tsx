@@ -66,12 +66,12 @@ const Carousel = React.forwardRef<
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
-    const [lastIndex, setLastIndex] = React.useState(0);
     const [currentIndex, setCurrentIndex] = React.useState(0)
     const [totalSlides, setTotalSlides] = React.useState(0)
     const { setSwipedIndex } = useStore();
     const startY = React.useRef<number | null>(null);
     const currentY = React.useRef<number | null>(null);
+
 
     const handleTouchStart = (event: React.TouchEvent) => {
       startY.current = event.touches[0].clientY;
@@ -86,30 +86,38 @@ const Carousel = React.forwardRef<
         const diff = startY.current - currentY.current;
         if (Math.abs(diff) > 30) {
           if (diff > 0) {
-            api?.scrollNext(); // dispatch happens in onSelect
+            api?.scrollNext(); 
           } else {
-            api?.scrollPrev(); // dispatch happens in onSelect
+            api?.scrollPrev(); 
           }
         }
       }
       startY.current = null;
       currentY.current = null;
     };
+    const [hasScrolled, setHasScrolled] = React.useState(false);
 
     const onSelect = React.useCallback(
       (api: CarouselApi) => {
         if (!api) return;
+    
         const selectedIndex = api.selectedScrollSnap();
-        if (selectedIndex!==0) {
-          setSwipedIndex(selectedIndex);          
+    
+        if (selectedIndex !== 0) {
+          setSwipedIndex(selectedIndex);
+        }
+    
+        if (!hasScrolled) {
+          api.scrollTo(0);
+          setHasScrolled(true); 
         }
         setCanScrollPrev(api.canScrollPrev());
         setCanScrollNext(api.canScrollNext());
         onSlideChange?.(selectedIndex);
       },
-      [onSlideChange]
+      [onSlideChange, hasScrolled]
     );
-
+    
 
     React.useEffect(() => {
       if (!api || !setApi) return;

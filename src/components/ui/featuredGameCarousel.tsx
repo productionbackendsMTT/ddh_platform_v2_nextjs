@@ -2,7 +2,6 @@
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import Image from "next/image";
-import useStore from "@/app/zustand/Store";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 
@@ -66,10 +65,8 @@ const Carousel = React.forwardRef<
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
-    const [lastIndex, setLastIndex] = React.useState(0);
     const [currentIndex, setCurrentIndex] = React.useState(0)
     const [totalSlides, setTotalSlides] = React.useState(0)
-    const { setSwipedIndex } = useStore();
     const startY = React.useRef<number | null>(null);
     const currentY = React.useRef<number | null>(null);
 
@@ -86,9 +83,9 @@ const Carousel = React.forwardRef<
         const diff = startY.current - currentY.current;
         if (Math.abs(diff) > 30) {
           if (diff > 0) {
-            api?.scrollNext(); // dispatch happens in onSelect
+            api?.scrollNext(); 
           } else {
-            api?.scrollPrev(); // dispatch happens in onSelect
+            api?.scrollPrev(); 
           }
         }
       }
@@ -133,7 +130,7 @@ const Carousel = React.forwardRef<
             orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
           scrollPrev: () => {
             if (!api) return;
-            api.scrollPrev(); // trigger movement
+            api.scrollPrev();
           },
 
           scrollNext: () => {

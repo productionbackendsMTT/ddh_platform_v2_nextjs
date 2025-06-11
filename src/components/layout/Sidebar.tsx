@@ -1,32 +1,49 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SidebarBg from '../svg/SidebarBg';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Sidebar = () => {
     const [category, setCategory] = useState('all');
+    const router=useRouter();
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+          router.push(`?category=${category}`);
+    }, [category])
+    
+    const handelCategory=(linkName:string)=>{
+        setCategory(linkName);
+        setIsOpen(false);
+    }
+
     const sidebar = [
         {
-            name: 'all',
+            name: 'All',
+            linkName:'all',
             icon: '/assets/images/all.png'
         },
         {
-            name: 'slots',
+            name: 'Slots',
+            linkName:'Slot',
             icon: '/assets/images/slot.png'
         },
         {
-            name: 'favorite',
+            name: 'Favorite',
+            linkName:'fav',
             icon: '/assets/images/favr.png'
         },
         {
-            name: 'keno',
+            name: 'Keno',
+            linkName:'Keno',
             icon: '/assets/images/keno.png'
         },
         {
-            name: 'other',
+            name: 'Other',
+            linkName:'other',
             icon: '/assets/images/others.png'
         }
     ]
@@ -36,7 +53,6 @@ const Sidebar = () => {
             {/* Overlay */}
             {/* {isOpen && <div className={`absolute inset-0 bg-black opacity-70 z-[9] ${isOpen ? 'block' : 'hidden'}`} onClick={() => setIsOpen(false)}></div>} */}
             {isOpen&&(<div className="absolute bottom-0  portrait:h-[100vw] landscape:h-[100vh] portrait:left-[-3.2vh] landscape:left-[-3.2vw] portrait:w-[30dvh] landscape:w-[30dvw] z-[10] overflow-hidden">
-                {/* Rotating SidebarBg with spring animation */}
                 {isOpen && <motion.div
                     initial={{ rotate: 180 }}
                     animate={{ rotate: !isOpen ? -180 : 0 }}
@@ -51,10 +67,10 @@ const Sidebar = () => {
                     <div className='absolute top-[15%] py-[2vw]   w-[95%]  h-full'>
                         {
                             sidebar.map((item, index) => (
-                                <button onClick={() => setCategory(item?.name)} key={index} className={`${category === item?.name ? 'bg-[#D9D9D91A]' : 'opacity-75'} group transition-all portrait:gap-y-[.5vh] landscape:gap-y-[.5vw] flex-col  w-full flex justify-center hover:bg-[#D9D9D91A] cursor-pointer  px-[1.5vw] `}>
+                                <button onClick={() => handelCategory(item?.linkName)} key={index} className={`${category === item?.linkName ? 'bg-[#D9D9D91A]' : 'opacity-75'} group transition-all portrait:gap-y-[.5vh] landscape:gap-y-[.5vw] flex-col  w-full flex justify-center hover:bg-[#D9D9D91A] cursor-pointer  px-[1.5vw]`}>
                                     <div className='flex items-center justify-start portrait:gap-x-[1.5vh] hover:scale-110 landscape:gap-x-[1.5vw] w-[75%] portrait:pl-[5vh] landscape:pl-[5vw] portrait:py-[.8vh] landscape:py-[.8vw]'>
                                         <Image src={item.icon} alt={item.name} width={2000} height={2000} priority quality={100} className="portrait:w-[4.1vh] portrait:h-[3.6vh] landscape:w-[4.1vw] landscape:h-[3.6vw]" />
-                                        <span className={`text-white  ${category === item?.name ? 'portrait:text-[1.6vh] landscape:text-[1.6vw]' : ' landscape:text-[1.4vw] portrait:text-[1.4vh] text-white/50'} portrait:group-hover:text-[1.6vh] landscape:group-hover:text-[1.6vw] capitalize`}>{item?.name}</span>
+                                        <span className={`text-white  ${category === item?.linkName ? 'portrait:text-[1.6vh] landscape:text-[1.6vw]' : ' landscape:text-[1.4vw] portrait:text-[1.4vh] text-white/50'} portrait:group-hover:text-[1.6vh] landscape:group-hover:text-[1.6vw] capitalize`}>{item?.name}</span>
                                     </div>
                                     <svg className='w-[78%] justify-center' viewBox="0 0 299 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1 1H298" stroke="url(#paint0_linear_37_964)" strokeLinecap="round" />
