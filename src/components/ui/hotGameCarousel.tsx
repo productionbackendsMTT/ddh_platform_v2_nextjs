@@ -84,9 +84,9 @@ const Carousel = React.forwardRef<
         const diff = startY.current - currentY.current;
         if (Math.abs(diff) > 30) {
           if (diff > 0) {
-            api?.scrollNext(); // dispatch happens in onSelect
+            api?.scrollNext(); 
           } else {
-            api?.scrollPrev(); // dispatch happens in onSelect
+            api?.scrollPrev(); 
           }
         }
       }
@@ -105,7 +105,6 @@ const Carousel = React.forwardRef<
       },
       [onSlideChange]
     );
-
 
     React.useEffect(() => {
       if (!api || !setApi) return;

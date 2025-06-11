@@ -66,7 +66,6 @@ const Carousel = React.forwardRef<
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
-    const [lastIndex, setLastIndex] = React.useState(0);
     const [currentIndex, setCurrentIndex] = React.useState(0)
     const [totalSlides, setTotalSlides] = React.useState(0)
     const { setSwipedIndex } = useStore();
@@ -87,9 +86,9 @@ const Carousel = React.forwardRef<
         const diff = startY.current - currentY.current;
         if (Math.abs(diff) > 30) {
           if (diff > 0) {
-            api?.scrollNext(); // dispatch happens in onSelect
+            api?.scrollNext(); 
           } else {
-            api?.scrollPrev(); // dispatch happens in onSelect
+            api?.scrollPrev(); 
           }
         }
       }
@@ -112,7 +111,6 @@ const Carousel = React.forwardRef<
           api.scrollTo(0);
           setHasScrolled(true); 
         }
-    
         setCanScrollPrev(api.canScrollPrev());
         setCanScrollNext(api.canScrollNext());
         onSlideChange?.(selectedIndex);

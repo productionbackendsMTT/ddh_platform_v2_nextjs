@@ -67,7 +67,7 @@ const Sidebar = () => {
                     <div className='absolute top-[15%] py-[2vw]   w-[95%]  h-full'>
                         {
                             sidebar.map((item, index) => (
-                                <button onClick={() => handelCategory(item?.linkName)} key={index} className={`${category === item?.linkName ? 'bg-[#D9D9D91A]' : 'opacity-75'} group transition-all portrait:gap-y-[.5vh] landscape:gap-y-[.5vw] flex-col  w-full flex justify-center hover:bg-[#D9D9D91A] cursor-pointer  px-[1.5vw] `}>
+                                <button onClick={() => handelCategory(item?.linkName)} key={index} className={`${category === item?.linkName ? 'bg-[#D9D9D91A]' : 'opacity-75'} group transition-all portrait:gap-y-[.5vh] landscape:gap-y-[.5vw] flex-col  w-full flex justify-center hover:bg-[#D9D9D91A] cursor-pointer  px-[1.5vw]`}>
                                     <div className='flex items-center justify-start portrait:gap-x-[1.5vh] hover:scale-110 landscape:gap-x-[1.5vw] w-[75%] portrait:pl-[5vh] landscape:pl-[5vw] portrait:py-[.8vh] landscape:py-[.8vw]'>
                                         <Image src={item.icon} alt={item.name} width={2000} height={2000} priority quality={100} className="portrait:w-[4.1vh] portrait:h-[3.6vh] landscape:w-[4.1vw] landscape:h-[3.6vw]" />
                                         <span className={`text-white  ${category === item?.linkName ? 'portrait:text-[1.6vh] landscape:text-[1.6vw]' : ' landscape:text-[1.4vw] portrait:text-[1.4vh] text-white/50'} portrait:group-hover:text-[1.6vh] landscape:group-hover:text-[1.6vw] capitalize`}>{item?.name}</span>

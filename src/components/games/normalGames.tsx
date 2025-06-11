@@ -59,7 +59,7 @@ const NormalGames = ({ normalGames,isCategory }: { normalGames: NormalGamesProps
     >
       <CarouselContent>
         <div ref={invisibleTextRef} className='absolute left-[-7vw] invisible'>
-          capture -1 CaRD
+          capture -1 CARD
         </div>
 
         {chunkedGames.map((chunk, index) => (

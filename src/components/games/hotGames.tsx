@@ -44,7 +44,7 @@ const HotGames = ({ hotgame }: { hotgame: { hot: NormalGamesProps[], popular: No
                 <GameCard
                   frame={'/assets/images/lowGlow_Border.png'}
                   games={game}
-                  ImageClass={' portrait:rounded-[1.7vh] landscape:rounded-[1.7vw] portrait:p-[.29vh] landscape:p-[.29vw]'}
+                  ImageClass={'portrait:rounded-[1.7vh] landscape:rounded-[1.7vw] portrait:p-[.29vh] landscape:p-[.29vw]'}
                   StylesClass={'portrait:w-[7.5vh] portrait:h-[12vh]  landscape:w-[7.5vw] landscape:h-[12vw]   portrait:rounded-[1.6vh] landscape:rounded-[1.6vw]'}
                 />
               </div>

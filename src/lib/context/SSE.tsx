@@ -2,12 +2,15 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback, useRef, ReactNode } from 'react';
 import { config } from '../config';
+import { useRouter } from 'next/navigation';
 
 export enum SSEEventType {
   USER_CONNECTED = 'user-connected',
   USER_DISCONNECTED = 'user-disconnected',
   GAME_STARTED = 'game-started',
   GAME_ENDED = 'game-ended',
+  GAME_EXIT = 'game-exit',
+  USER_KICKOUT='game-kickout'
 }
 
 export interface SSEEventData {
@@ -44,7 +47,7 @@ export const SSEProvider: React.FC<SSEProviderProps> = ({
   const [lastEvent, setLastEvent] = useState<{ type: SSEEventType; data: SSEEventData } | null>(null);
   const [connectedUsers, setConnectedUsers] = useState<SSEEventData[]>([]);
   const [activeGames, setActiveGames] = useState<{ [gameId: string]: SSEEventData[] }>({});
-
+  const router = useRouter();  
   const eventSourceRef = useRef<EventSource | null>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -172,6 +175,36 @@ export const SSEProvider: React.FC<SSEProviderProps> = ({
           setLastEvent({ type: SSEEventType.GAME_ENDED, data });
         } catch (error) {
           console.error('SSE: Error handling game-ended event', error);
+        }
+      });
+
+      eventSource.addEventListener(SSEEventType.USER_KICKOUT, (event) => {
+        try {
+          const data = JSON.parse((event as MessageEvent).data) as SSEEventData;
+          console.log('SSE: User kicked out', data);
+          setLastEvent({ type: SSEEventType.USER_KICKOUT, data });
+
+          // Close the SSE connection
+          disconnect();
+
+          // Redirect to logout page
+          router.push('/logout');
+        } catch (error) {
+          console.error('SSE: Error handling user-kickout event', error);
+        }
+      });
+
+
+      eventSource.addEventListener(SSEEventType.GAME_EXIT, (event) => {
+        try {
+          const data = JSON.parse((event as MessageEvent).data) as SSEEventData;
+          console.log('SSE: Game exit', data);
+          setLastEvent({ type: SSEEventType.GAME_EXIT, data });
+
+          // Redirect to home page
+          router.push('/');
+        } catch (error) {
+          console.error('SSE: Error handling game-exit event', error);
         }
       });
 
