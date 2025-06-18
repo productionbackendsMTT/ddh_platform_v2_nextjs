@@ -25,7 +25,7 @@ const NormalGames = ({ normalGames,isCategory }: { normalGames: NormalGamesProps
   }, [])
 
   const chunkedGames = useMemo(
-    () => chunkArray(normalGames, ((isSwiped === 0)&&(isCategory==='all')) ? 2 : 5),
+    () => chunkArray(normalGames, !((isSwiped === 0)&&(isCategory==='all')) ? 5 : 2),
     [normalGames,isSwiped,isCategory, chunkArray]
   )
 

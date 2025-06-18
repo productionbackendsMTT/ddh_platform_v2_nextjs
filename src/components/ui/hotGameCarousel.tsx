@@ -25,7 +25,7 @@ type CarouselContextProps = {
   scrollPrev: () => void;
   scrollNext: () => void;
   canScrollPrev: boolean;
-  canScrollNext: boolean;
+  canScrollNext: boolean;  
   currentIndex : number;
   totalSlides : number;
 } & CarouselProps;
@@ -261,7 +261,7 @@ const CarouselNext = React.forwardRef<
       <Image
         src={"/assets/images/arrow-right.png"}
         alt="arrow-right"
-        width={100}
+        width={100}               
         height={100}
         className="portrait:w-[4vh] landscape:w-[4vw] object-contain"
       />

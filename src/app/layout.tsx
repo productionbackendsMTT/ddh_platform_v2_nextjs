@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-
+import { ReactQueryProvider } from "@/lib/reactQuery";
+import { VolumeProvider } from "@/lib/context/volumeControle";
+import AudioPlayer from "@/components/ui/audioPlayer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,6 +15,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <head>
@@ -22,7 +25,12 @@ export default function RootLayout({
       <body>
         <div className="relative w-screen h-screen bg-[#790b73cd] cursor-custom">
           <div className="absolute top-1/2 left-1/2 rotate-90 sm:rotate-0 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[100vh] h-[100vw] sm:w-screen sm:h-screen">
-            {children}
+            <ReactQueryProvider>
+              <VolumeProvider>
+                {children}
+                <AudioPlayer/>
+              </VolumeProvider>
+            </ReactQueryProvider>
             <Toaster
               containerClassName="m-0 flex items-center justify-center"
               containerStyle={{

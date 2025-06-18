@@ -13,7 +13,7 @@ const Notification: React.FC<NotificationProps> = ({
 }) => {
   return (
     <div
-      className={` bg-black/40 absolute  flex items-center justify-center landscape:w-[100vw] portrait:w-[100vh] portrait:h-[100vw] landscape:h-screen  z-50 `}
+      className={` bg-black/40 absolute flex items-center justify-center landscape:w-[100vw] portrait:w-[100vh] portrait:h-[100vw] landscape:h-screen z-50`}
     >
       <div
         className={`${className} h-auto sm:w-[70%] w-[90vw] relative flex items-center justify-center ${

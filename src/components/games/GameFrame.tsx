@@ -7,7 +7,7 @@ const GameFrame = ({ gameurl }: { gameurl: string }) => {
   const [progress, setProgress] = useState(0);
   const { lastEvent } = useSSE();
   const [gameConnected, setGameConnected] = useState(false);
-
+   console.log(gameurl,"cleogame url")
   useEffect(() => {
     const urlObj = new URL(gameurl);
     const gameId = urlObj.searchParams.get("gameId");
@@ -54,7 +54,7 @@ const GameFrame = ({ gameurl }: { gameurl: string }) => {
       />
       {/* Loader overlay */}
       <div
-        className={`absolute top-0 left-0 w-full h-full z-[10] transition-opacity duration-500 pointer-events-none ${
+        className={`absolute top-0 left-0 w-full h-full  z-[10] transition-opacity duration-500 pointer-events-none ${
           gameConnected ? 'opacity-0' : 'opacity-100'
         }`}
       >
