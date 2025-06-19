@@ -30,7 +30,7 @@ const GameFrame = ({ gameurl }: { gameurl: string }) => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= targetProgress) {
-          clearInterval(interval); // Stop updating once target is reached
+          clearInterval(interval); 
           return prev;
         }
         if (prev < 70) return prev + 3;

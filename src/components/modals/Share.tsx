@@ -1,47 +1,60 @@
 'use client';
-import React from 'react';
-import QRCode from 'react-qr-code';
+import { div } from 'framer-motion/client';
+import React, { useState } from 'react';
+import Facebook from '../svg/Facebook';
+import Whatsapp from '../svg/Whatsapp';
+import Link from 'next/link';
+import ShareTitle from '../svg/ShareTitle';
 
 const Share = () => {
-    const shareUrl = 'https://pandapower777.com/'; // Replace with your actual link
+    const shareUrl = 'https://pandapower777.com/';
+    const shareMessage = `Play exciting games and win amazing rewards! Check it out now: ${shareUrl}`;
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        });
+    };
 
     return (
-        <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-[#60185E] 
-                portrait:rounded-[1.5vh] landscape:rounded-[1.5vw]
-                portrait:border-[.3vh] landscape:border-[.3vw] 
-                border-[#B732B4] 
-                portrait:shadow-[0_0_1vh_rgba(0,0,0,0.5)] landscape:shadow-[0_0_1vw_rgba(0,0,0,0.5)] 
-                portrait:px-[3vh] landscape:px-[3vw] 
-                portrait:py-[2vh] landscape:py-[2vw]
-                portrait:w-[36vh] landscape:w-[40vw]
-                portrait:h-[auto] landscape:h-[auto]
-                text-white text-center flex flex-col items-center 
-                portrait:space-y-[2vh] landscape:space-y-[1.5vw]"
-        >
-            <h2 className="font-semibold 
-                portrait:text-[2.2vh] landscape:text-[1.5vw] 
-                text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-400"
-            >
-                Share this link
-            </h2>
+        <>
+            <ShareTitle/>
+            <div className='w-full flex flex-col items-center portrait:gap-y-[1vh] landscape:gap-y-[1vw]'>
+                <div className='w-full flex items-center portrait:gap-x-[6vh] landscape:gap-x-[6vw]'>
+                    <Link
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='portrait:w-[11vh] landscape:w-[11vw] cursor-pointer hover:scale-[.9] transition-all'
+                    >
+                        <Facebook />
+                    </Link>
 
-            <div className="portrait:w-[11vh] landscape:w-[14vw]">
-                <QRCode
-                    className="w-full h-auto"
-                    value={shareUrl}
-                    viewBox="0 0 256 256"
-                />
+                    <Link
+                        href={`https://wa.me/?text=${encodeURIComponent(shareMessage)}`}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='portrait:w-[12.3vh] landscape:w-[12.3vw] cursor-pointer hover:scale-[.9] transition-all'
+                    >
+                        <Whatsapp />
+                    </Link>
+                </div>
+
+                <div className='flex items-center justify-center portrait:pt-[3vh] landscape:pt-[3vw] portrait:gap-x-[.5vh] landscape:gap-x-[.5vw]'>
+                    <span className='text-gray-700 portrait:text-[1vh] landscape:text-[1vw] portrait:border-[.2vh] landscape:border-[.2vw] border-amber-400 bg-gray-100 portrait:px-[2.5vh] landscape:px-[2.5vw] portrait:py-[.5vh] landscape:py-[.5vw]'>
+                        {shareUrl}
+                    </span>
+                    <button
+                        onClick={handleCopy}
+                        className='portrait:px-[1vh] landscape:px-[1vw] portrait:py-[.5vh] portrait:text-[1vh]  landscape:text-[1vw] landscape:py-[.5vw] bg-blue-500 text-white bg-gradient-to-r border-amber-400 portrait:border-[.2vh] landscape:border-[.2vw] from-[#E943FF] to-[#ED54FF] hover:brightness-150 transition-all'
+                    >
+                        {copied ? 'Copied!' : 'Copy Link'}
+                    </button>
+                </div>
             </div>
-
-            <p className="text-gray-200 
-                portrait:text-[1.5vh] landscape:text-[.9vw] 
-                break-words portrait:max-w-[30vh] landscape:max-w-[30vw]"
-            >
-                {shareUrl}
-            </p>
-        </div>
+        </>
     );
 };
 

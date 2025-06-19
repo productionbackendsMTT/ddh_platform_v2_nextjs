@@ -58,14 +58,14 @@ const NormalGames = ({ normalGames,isCategory }: { normalGames: NormalGamesProps
         ${(isSwiped === 0)&&(isCategory==='all') ? 'portrait:w-[35vh] landscape:w-[35vw]' : 'portrait:w-[92vh] landscape:w-[92vw]'}`}
     >
       <CarouselContent>
-        <div ref={invisibleTextRef} className='absolute left-[-7vw] invisible'>
+        <div ref={invisibleTextRef} className='absolute  left-[-7vw] invisible'>
           capture -1 CARD
         </div>
 
         {chunkedGames.map((chunk, index) => (
           <CarouselItem
             key={index}
-            className="flex justify-start portrait:gap-x-[.9vh] landscape:gap-x-[.7vw]"
+            className="flex justify-start portrait:gap-x-[1.5vh] landscape:gap-x-[1.5vw]"
           >
             {chunk.map((game) => (
               <div key={game._id} className="relative">
