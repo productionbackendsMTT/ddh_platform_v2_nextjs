@@ -15,7 +15,7 @@ import Mute from '../svg/icon/Mute';
 
 const Header = () => {
     const { audioRef, playAudio, pauseAudio } = useVolumeControl();
-    const [ismute,setIsMute] = React.useState(false);
+    const [ismute, setIsMute] = React.useState(false);
     const [modalContent, setModalContent] = React.useState('');
     let modalComponent;
     switch (modalContent) {
@@ -28,26 +28,33 @@ const Header = () => {
         case 'announcement':
             modalComponent = <Announcement />
             break;
-            case 'leaderboard':
-                modalComponent = <Leaderboard />
-                break;
+        case 'leaderboard':
+            modalComponent = <Leaderboard />
+            break;
     }
 
     const handelMuteUnMute = () => {
         if (audioRef.current) {
-                ismute?playAudio():pauseAudio(); 
-      }
+            ismute ? playAudio() : pauseAudio();
+        }
     }
 
     useEffect(() => {
         handelMuteUnMute();
-    },[ismute])
+    }, [ismute])
 
     return (
         <>
             <div className='relative z-[99]'>
-                <Image src={'/assets/header/header_bg.png'} alt='header_bg' width={2000} height={500} quality={100} className='portrait:w-[100vh] landscape:w-[100vw] landscape:h-[6vw] lg:landscape:h-[5vw] portrait:h-[7vh]' />
-                <div className='absolute flex z-50 landscape:px-[2vw] portrait:px-[2vh] justify-between top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]  w-full h-full'>
+                <video
+                    src={"/assets/video/header_bg.mp4"}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className='portrait:w-[100vh] object-fit '
+                />
+                <div className='absolute flex z-50 landscape:px-[2vw] items-center portrait:px-[2vh] justify-between top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]  w-full h-full'>
                     <div className='landscape:py-[.3vw] portrait:py-[.3vh]'>
                         <div className='flex portrait:space-x-[.8vh] items-center landscape:space-x-[.8vw]'>
                             <Image
@@ -105,16 +112,16 @@ const Header = () => {
                     {/* settings */}
                     <div className='flex items-center portrait:space-x-[2vh] landscape:gap-x-[2vw]'>
                         <button onClick={() => setModalContent('share')} className='portrait:w-[2.5vh] hover:scale-110 transition-all cursor-pointer landscape:w-[2.5vw]' >
-                            <ShareIcon/>
+                            <ShareIcon />
                         </button>
                         <button onClick={() => setModalContent('announcement')} className='portrait:w-[5.2vh] hover:scale-110 transition-all cursor-pointer landscape:w-[5.2vw]' >
-                            <AnnouncementIcon/>
+                            <AnnouncementIcon />
                         </button>
                         <button onClick={() => setModalContent('announcement')} className='portrait:w-[2.9vh] hover:scale-110 transition-all cursor-pointer landscape:w-[2.9vw]' >
-                            <SettingIcon/>
+                            <SettingIcon />
                         </button>
                         <button onClick={() => setIsMute(!ismute)} className='portrait:w-[2.7vh] hover:scale-110 transition-all cursor-pointer landscape:w-[2.8vw]' >
-                            {!ismute?<Unmute/>:<Mute/>}
+                            {!ismute ? <Unmute /> : <Mute />}
                         </button>
                     </div>
                 </div>

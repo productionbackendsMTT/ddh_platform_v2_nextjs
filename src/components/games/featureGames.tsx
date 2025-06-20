@@ -26,8 +26,8 @@ const FeatureGames = ({ featuregame }: { featuregame: NormalGamesProps[] }) => {
                                         frame={'/assets/images/boder.webp'}
                                         games={game}
                                         isFrame={false}
-                                        ImageClass="portrait:rounded-[5.5vh]  landscape:rounded-[5.5vw] portrait:p-[.6vh] landscape:p-[.6vw]"
-                                        StylesClass="portrait:w-[19.7vh] portrait:h-[32vh] landscape:w-[19.7vw] landscape:h-[32vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
+                                        ImageClass="portrait:rounded-[5.5vh]  landscape:rounded-[6vw] portrait:p-[.7vh] landscape:p-[.7vw]"
+                                        StylesClass="portrait:w-[21vh] portrait:h-[35vh] landscape:w-[21vw] landscape:h-[35vw]   portrait:rounded-[3.4vh] landscape:rounded-[3.4vw]"
                                     />
                                 </div>
                             </CarouselItem>
